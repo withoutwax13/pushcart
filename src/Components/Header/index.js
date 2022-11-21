@@ -31,7 +31,7 @@ const Header = () => {
     return (
         <nav className="navbar navbar-expand-lg">
             <div className="container-fluid">
-                <a className="navbar-brand" href="/"><h4>PushCart</h4></a>
+                <a className="navbar-brand" href="/pushcart"><h4>PushCart</h4></a>
                 <button 
                     className="navbar-toggler" type="button" 
                     data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
