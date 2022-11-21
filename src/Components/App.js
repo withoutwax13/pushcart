@@ -1,11 +1,14 @@
 import * as React from 'react'
 import {
+  Routes,
+  Route,
+} from "react-router-dom"
+import {
   ThemeProvider, 
   createTheme
 } from '@mui/material/styles'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Route from '../Route'
 import Cart from './Cart';
 import Header from './Header';
 import Home from './Home';
@@ -37,24 +40,28 @@ function App() {
   
   return (
     <ThemeProvider theme={theme}>
-      <Route path='/pushcart/'>
-        <Header/>
-        <Home/>
-      </Route>
-      <Route path='/pushcart/login/'>
-        <Login/>
-      </Route>
-      <Route path='/pushcart/register/'>
-        <Register/>
-      </Route>
-      <Route path='/pushcart/products/'>
-        <Header/>
-        <Products/>
-      </Route>
-      <Route path='/pushcart/cart/'>
-        <Header/>
-        <Cart/>
-      </Route>
+      <Routes>
+      <Route path='pushcart' element={
+        <>
+          <Header/>
+          <Home/>
+        </>
+      }/>
+      <Route path='pushcart/login' element={<Login/>}/>
+      <Route path='pushcart/register' element={<Register/>}/>
+      <Route path='pushcart/products' element={
+        <>
+          <Header/>
+          <Products/>
+        </>
+      }/>
+      <Route path='pushcart/cart' element={
+        <>
+          <Header/>
+          <Cart/>
+        </>
+      }/>
+      </Routes>
     </ThemeProvider>
   );
 }
