@@ -37,21 +37,21 @@ function App() {
   
   return (
     <ThemeProvider theme={theme}>
-      <Route path='/pushcart'>
+      <Route path='/pushcart/'>
         <Header/>
         <Home/>
       </Route>
-      <Route path='/login'>
+      <Route path='/login/'>
         <Login/>
       </Route>
-      <Route path='/register'>
+      <Route path='/register/'>
         <Register/>
       </Route>
-      <Route path='/products'>
+      <Route path='/products/'>
         <Header/>
         <Products/>
       </Route>
-      <Route path='/cart'>
+      <Route path='/cart/'>
         <Header/>
         <Cart/>
       </Route>

@@ -31,7 +31,7 @@ const Header = () => {
     return (
         <nav className="navbar navbar-expand-lg">
             <div className="container-fluid">
-                <a className="navbar-brand" href="/pushcart"><h4>PushCart</h4></a>
+                <a className="navbar-brand" href="/pushcart/"><h4>PushCart</h4></a>
                 <button 
                     className="navbar-toggler" type="button" 
                     data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
@@ -208,7 +208,7 @@ const Header = () => {
                                  </div>
                             
                              </div>
-                            <Container className='text-center'><Button href='/products'><Typography variant='h6'>See all</Typography><KeyboardDoubleArrowDownIcon/></Button></Container>
+                            <Container className='text-center'><Button href='/products/'><Typography variant='h6'>See all</Typography><KeyboardDoubleArrowDownIcon/></Button></Container>
                          </div>
                     <a href="/orders"  className='nav-categories nav-link px-1'>
                         <ViewStreamOutlinedIcon/> <span className='px-1'>ORDERS</span>
@@ -230,10 +230,10 @@ const Header = () => {
                         'aria-labelledby': 'basic-button',
                         }}
                     >
-                        <MenuItem onClick={(e)=>window.location.href = '/setting'}>My Settings</MenuItem>
-                        <MenuItem onClick={(e)=>window.location.href = '/login'}>{Object.keys(store.getState().user).length === 0 ? `Login / Register` : `Visit ${store.getState().user.name}'s Profile`}</MenuItem>
+                        <MenuItem onClick={(e)=>window.location.href = '/setting/'}>My Settings</MenuItem>
+                        <MenuItem onClick={(e)=>window.location.href = '/login/'}>{Object.keys(store.getState().user).length === 0 ? `Login / Register` : `Visit ${store.getState().user.name}'s Profile`}</MenuItem>
                     </Menu>
-                    <a href='/cart' className='nav-categories nav-link px-1'>
+                    <a href='/cart/' className='nav-categories nav-link px-1'>
                         <Badge badgeContent={cartItems} color="secondary">
                                <ShoppingCartOutlinedIcon/>
                            </Badge>
