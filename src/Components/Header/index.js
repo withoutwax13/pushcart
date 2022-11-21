@@ -231,7 +231,7 @@ const Header = () => {
                         }}
                     >
                         <MenuItem onClick={(e)=>window.location.href = '/setting/'}>My Settings</MenuItem>
-                        <MenuItem onClick={(e)=>window.location.href = '/login/'}>{Object.keys(store.getState().user).length === 0 ? `Login / Register` : `Visit ${store.getState().user.name}'s Profile`}</MenuItem>
+                        <MenuItem onClick={(e)=>window.location.href = '/login/'}>Login/Register</MenuItem>
                     </Menu>
                     <a href='/cart/' className='nav-categories nav-link px-1'>
                         <Badge badgeContent={cartItems} color="secondary">
