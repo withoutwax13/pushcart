@@ -37,7 +37,7 @@ function App() {
   
   return (
     <ThemeProvider theme={theme}>
-      <Route path='/pushcart/'>
+      <Route path='pushcart'>
         <Header/>
         <Home/>
       </Route>
