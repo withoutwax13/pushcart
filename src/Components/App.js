@@ -41,17 +41,17 @@ function App() {
         <Header/>
         <Home/>
       </Route>
-      <Route path='/login/'>
+      <Route path='/pushcart/login/'>
         <Login/>
       </Route>
-      <Route path='/register/'>
+      <Route path='/pushcart/register/'>
         <Register/>
       </Route>
-      <Route path='/products/'>
+      <Route path='/pushcart/products/'>
         <Header/>
         <Products/>
       </Route>
-      <Route path='/cart/'>
+      <Route path='/pushcart/cart/'>
         <Header/>
         <Cart/>
       </Route>

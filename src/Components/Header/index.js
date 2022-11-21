@@ -208,9 +208,9 @@ const Header = () => {
                                  </div>
                             
                              </div>
-                            <Container className='text-center'><Button href='/products/'><Typography variant='h6'>See all</Typography><KeyboardDoubleArrowDownIcon/></Button></Container>
+                            <Container className='text-center'><Button href='/pushcart/products/'><Typography variant='h6'>See all</Typography><KeyboardDoubleArrowDownIcon/></Button></Container>
                          </div>
-                    <a href="/orders"  className='nav-categories nav-link px-1'>
+                    <a href="/orders/"  className='nav-categories nav-link px-1'>
                         <ViewStreamOutlinedIcon/> <span className='px-1'>ORDERS</span>
                     </a>
                     <a className='nav-categories nav-link px-1'
@@ -230,10 +230,10 @@ const Header = () => {
                         'aria-labelledby': 'basic-button',
                         }}
                     >
-                        <MenuItem onClick={(e)=>window.location.href = '/setting/'}>My Settings</MenuItem>
-                        <MenuItem onClick={(e)=>window.location.href = '/login/'}>Login/Register</MenuItem>
+                        <MenuItem onClick={(e)=>window.location.href = '/pushcart/setting/'}>My Settings</MenuItem>
+                        <MenuItem onClick={(e)=>window.location.href = '/pushcart/login/'}>Login/Register</MenuItem>
                     </Menu>
-                    <a href='/cart/' className='nav-categories nav-link px-1'>
+                    <a pathname='/pushcart/cart/' className='nav-categories nav-link px-1'>
                         <Badge badgeContent={cartItems} color="secondary">
                                <ShoppingCartOutlinedIcon/>
                            </Badge>
