@@ -14,6 +14,8 @@ import * as React from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
+import {Link} from 'react-router-dom'
+
 
 const Header = () => {
     const [cartItems, setcartItems] = useState(0)
@@ -31,7 +33,7 @@ const Header = () => {
     return (
         <nav className="navbar navbar-expand-lg">
             <div className="container-fluid">
-                <a className="navbar-brand" href="/pushcart"><h4>PushCart</h4></a>
+                <Link className="navbar-brand" to={`/pushcart`}><h4>PushCart</h4></Link>
                 <button 
                     className="navbar-toggler" type="button" 
                     data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
@@ -208,11 +210,11 @@ const Header = () => {
                                  </div>
                             
                              </div>
-                            <Container className='text-center'><Button href='/pushcart/products'><Typography variant='h6'>See all</Typography><KeyboardDoubleArrowDownIcon/></Button></Container>
+                            <Container className='text-center'><Link to={`/pushcart/products`}><Typography variant='h6'>See all</Typography><KeyboardDoubleArrowDownIcon/></Link></Container>
                          </div>
-                    <a href="/orders/"  className='nav-categories nav-link px-1'>
+                    <Link to={`/orders`}  className='nav-categories nav-link px-1'>
                         <ViewStreamOutlinedIcon/> <span className='px-1'>ORDERS</span>
-                    </a>
+                    </Link>
                     <a className='nav-categories nav-link px-1'
                         id="basic-button"
                         aria-controls={open ? 'basic-menu' : undefined}
@@ -230,15 +232,15 @@ const Header = () => {
                         'aria-labelledby': 'basic-button',
                         }}
                     >
-                        <MenuItem onClick={(e)=>window.location.href = 'pushcart/setting/'}>My Settings</MenuItem>
-                        <MenuItem onClick={(e)=>window.location.href = 'pushcart/login/'}>Login/Register</MenuItem>
+                        <MenuItem><Link className='nav-categories nav-link px-1' to={`/pushcart/setting`}>My Settings</Link></MenuItem>
+                        <MenuItem><Link className='nav-categories nav-link px-1' to={`/pushcart/login`}>Login/Register</Link></MenuItem>
                     </Menu>
-                    <a href='/pushcart/cart/' className='nav-categories nav-link px-1'>
+                    <Link to={`/pushcart/cart`} className='nav-categories nav-link px-1'>
                         <Badge badgeContent={cartItems} color="secondary">
                                <ShoppingCartOutlinedIcon/>
                            </Badge>
                            <span className='px-2'>CART</span>
-                       </a>
+                       </Link>
                 </div>
                 </div>
             </div>
