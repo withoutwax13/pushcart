@@ -5,7 +5,6 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
 import Badge from '@mui/material/Badge';
-import store from '../../store'
 import { useEffect, useState } from 'react';
 import { Container } from '@mui/system';
 import { Typography } from '@mui/material';
@@ -15,10 +14,11 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
 
 
 
-const Header = () => {
+const Header = ({user, cart}) => {
     const categories = [
         {id: 0, categLabel: "Tops", categGroup: "Women", imgFile: "crop-top.png"},
         {id: 1, categLabel: "Bottoms", categGroup: "Women", imgFile: "skirt.png"},
@@ -45,7 +45,7 @@ const Header = () => {
         {id: 22, categLabel: "Outdoor & Garden", categGroup: "Home", imgFile: "h-garden.png"},
     ]
     const [cartItems, setcartItems] = useState(0)
-    useEffect(()=>setcartItems(store.getState().cart.length), [store.getState().cart.length])
+    useEffect(()=>setcartItems(cart.length), [cart])
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -176,7 +176,7 @@ const Header = () => {
                         className='text-center'
                     >
                         {/* <Typography variant='h5' className='nav-categories nav-link px-1'>{Object.keys(store.getState().user).length === 0 ? `Hi, User!` : `Hi, ${store.getState().user.first_name}`}</Typography> */}
-                        <MenuItem><Link className='nav-categories nav-link px-1' to={Object.keys(store.getState().user).length === 0 ? `/pushcart/login` : `/pushcart`}>{Object.keys(store.getState().user).length === 0 ? `Login/Register` : `Logout`}</Link></MenuItem>
+                        <MenuItem><Link className='nav-categories nav-link px-1' to={Object.keys(user).length === 0 ? `/pushcart/login` : `/pushcart`}>{Object.keys(user).length === 0 ? `Login/Register` : `Logout`}</Link></MenuItem>
                     </Menu>
                     <Link to={`/pushcart/cart`} className='nav-categories nav-link px-1'>
                         <Badge badgeContent={cartItems} color="secondary">
@@ -191,4 +191,11 @@ const Header = () => {
     )
 }
 
-export default Header
+const mapStateToProps = (state) => {
+    return {
+        cart: state.cart,
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps)(Header)
