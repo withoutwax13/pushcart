@@ -15,10 +15,12 @@ import MenuItem from '@mui/material/MenuItem';
 
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
+import { logoutCurrentUser } from '../../Actions';
 
 
 
-const Header = ({user, cart}) => {
+const Header = ({user, cart, logoutCurrentUser}) => {
+    console.log(user)
     const categories = [
         {id: 0, categLabel: "Tops", categGroup: "Women", imgFile: "crop-top.png"},
         {id: 1, categLabel: "Bottoms", categGroup: "Women", imgFile: "skirt.png"},
@@ -176,7 +178,7 @@ const Header = ({user, cart}) => {
                         className='text-center'
                     >
                         {/* <Typography variant='h5' className='nav-categories nav-link px-1'>{Object.keys(store.getState().user).length === 0 ? `Hi, User!` : `Hi, ${store.getState().user.first_name}`}</Typography> */}
-                        <MenuItem><Link className='nav-categories nav-link px-1' to={Object.keys(user).length === 0 ? `/pushcart/login` : `/pushcart`}>{Object.keys(user).length === 0 ? `Login/Register` : `Logout`}</Link></MenuItem>
+                        <MenuItem><Link className='nav-categories nav-link px-1' to={user === null ? `/pushcart/login` : `/pushcart`} onClick={user !== null ? logoutCurrentUser : ()=>{}}>{user === null ? `Login/Register` : `Logout`}</Link></MenuItem>
                     </Menu>
                     <Link to={`/pushcart/cart`} className='nav-categories nav-link px-1'>
                         <Badge badgeContent={cartItems} color="secondary">
@@ -198,4 +200,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(Header)
+export default connect(mapStateToProps, {logoutCurrentUser})(Header)

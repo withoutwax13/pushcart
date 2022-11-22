@@ -26,8 +26,10 @@ const cartReducer = (cartState = [], action) => {
     }
 }
 
-const userReducer = (userState = {}, action) => {
+const userReducer = (userState = null, action) => {
     switch(action.type){
+        case "LOGOUT_USER":
+            return action.payload
         default:
             return userState
     }

@@ -21,3 +21,10 @@ export const updateCart = (itemID, newState) => {
         }
     }
 }
+
+export const logoutCurrentUser = () => {
+    return {
+        type: "LOGOUT_USER",
+        payload: null
+    }
+}
