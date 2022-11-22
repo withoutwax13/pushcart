@@ -33,7 +33,7 @@ function Footer() {
                     <h3>Shop</h3>
                     <ul class="list-unstyled nav-links">
                         {categories.map((category, index)=>{
-                            return index <= 10 ? <li key={index}><Link to={`/pushcart/products`}>{category.categLabel}</Link></li> : null
+                            return index <= 6 ? <li key={index}><Link to={`/pushcart/products`}>{`${category.categGroup} ${category.categLabel}`}</Link></li> : null
                         })}
                         <li><Link to={`/pushcart/products`}>More...</Link></li>
                     </ul>
