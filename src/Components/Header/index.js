@@ -82,9 +82,9 @@ const Header = ({user, cart}) => {
                                  <div className="form-check pb-2">
                                      <h5 className="title">Women</h5>
                                      <ul className="list-unstyled">
-                                        {categories.filter(category=>category.categGroup === "Women").map(category=>{
+                                        {categories.filter(category=>category.categGroup === "Women").map((category, i)=>{
                                             return (
-                                                <li>
+                                                <li key={i}>
                                                     <img src={require(`../../Assets/images/${category.imgFile}`)}
                                                      width="50"/>
                                                     <Link to={`/pushcart/products`} state={{category}}><label className="form-check-label" for="flexCheckDefault">{category.categLabel}</label></Link>
@@ -100,9 +100,9 @@ const Header = ({user, cart}) => {
                                  <div className="form-check pb-2">
                                      <h5 className="title">Men</h5>
                                      <ul className="list-unstyled">
-                                        {categories.filter(category=>category.categGroup === "Men").map(category=>{
+                                        {categories.filter(category=>category.categGroup === "Men").map((category, i)=>{
                                             return (
-                                                <li>
+                                                <li key={i}>
                                                     <img src={require(`../../Assets/images/${category.imgFile}`)}
                                                      width="50"/>
                                                     <Link to={`/pushcart/products`} state={{category}}><label className="form-check-label" for="flexCheckDefault">{category.categLabel}</label></Link>
@@ -118,9 +118,9 @@ const Header = ({user, cart}) => {
                                  <div className="form-check pb-2">
                                      <h5 className="title">Kid</h5>
                                      <ul className="list-unstyled">
-                                        {categories.filter(category=>category.categGroup === "Kid").map(category=>{
+                                        {categories.filter(category=>category.categGroup === "Kid").map((category, i)=>{
                                             return (
-                                                <li>
+                                                <li key={i}>
                                                     <img src={require(`../../Assets/images/${category.imgFile}`)}
                                                      width="50"/>
                                                     <Link to={`/pushcart/products`} state={{category}}><label className="form-check-label" for="flexCheckDefault">{category.categLabel}</label></Link>
@@ -136,9 +136,9 @@ const Header = ({user, cart}) => {
                                  <div className="form-check pb-2">
                                      <h5 className="title">Home</h5>
                                      <ul className="list-unstyled">
-                                        {categories.filter(category=>category.categGroup === "Home").map(category=>{
+                                        {categories.filter(category=>category.categGroup === "Home").map((category, i)=>{
                                             return (
-                                                <li>
+                                                <li key={i}>
                                                     <img src={require(`../../Assets/images/${category.imgFile}`)}
                                                      width="50"/>
                                                     <Link to={`/pushcart/products`} state={{category}}><label className="form-check-label" for="flexCheckDefault">{category.categLabel}</label></Link>

@@ -26,7 +26,7 @@ const cartReducer = (cartState = [], action) => {
     }
 }
 
-const userReducer = (userState = null, action) => {
+const userReducer = (userState = {}, action) => {
     switch(action.type){
         default:
             return userState
