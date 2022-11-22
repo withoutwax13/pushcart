@@ -209,6 +209,8 @@ export function Products (props) {
     || document.documentElement.clientWidth
     || document.body.clientWidth;
 
+    const tagRandomizer = () => Math.floor(Math.random() * 3)
+
     // for slider components of price and stock, respectively
     const [value, setValue] = React.useState([20, 37]);
     const [valueStock, setValueStock] = React.useState([20, 37]);
@@ -441,7 +443,7 @@ export function Products (props) {
                             <div class="row">
                                 {products.map((product,index)=>{
                                     return (
-                                        <ProductCard key={index} data={product}/>
+                                        <ProductCard tag={tagRandomizer()} key={index} data={product}/>
                                     )
                                 })}
                             </div>

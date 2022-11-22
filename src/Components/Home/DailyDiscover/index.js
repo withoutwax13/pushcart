@@ -44,6 +44,7 @@ const products = [
 ]
 
 const DailyDiscover = ({addToCart}) => {
+  const tagRandomizer = () => Math.floor(Math.random() * 3)
     return (
         <div className="col-lg-12 col-12">
         <div className="daily-discover mt-3 pb-4">
@@ -54,7 +55,7 @@ const DailyDiscover = ({addToCart}) => {
               {/* <!-- DAILY DISCOVER 1 --> */}
               {products.map((product, index)=>{
                 return(
-                  <ProductCard key={index} data={product}/>
+                  <ProductCard tag={tagRandomizer()} key={index} data={product}/>
                 )
               })}
               

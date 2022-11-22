@@ -6,7 +6,11 @@ import { Badge, Grid, IconButton } from "@mui/material";
 import { useState } from "react";
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
+
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
@@ -24,6 +28,7 @@ const style = {
 };
 
 const ProductCard = (props) => {
+    const tags = ["NEW", "HOT", "BEST BUY"]
     const {id, productImage1, productImage2, price, heading, stock} = props.data
     const [countValue, setCountValue] = useState(0)
     const [open, setOpen] = React.useState(false);
@@ -67,33 +72,18 @@ const ProductCard = (props) => {
                 <img class="pic-1" src={require(`../../../Assets/images/${productImage1}`)}/>
                 <img class="pic-2" src={require(`../../../Assets/images/${productImage2}`)}/>
                     <ul class="d-flex align-items-center justify-content-center list-unstyled icons">
-                        <li onClick={handleOpen} class="icon-product"><span><img src={require(`../../../Assets/images/icon-cart.png`)}/></span></li>
+                        <li onClick={handleDecrement} class="icon-product"><span><RemoveCircleIcon/></span></li>
+                        <li class="icon-product">
+                            <span>
+                                <Badge badgeContent={countValue} color="primary">
+                                    <ShoppingCartRoundedIcon/>
+                                </Badge>
+                            </span>
+                        </li>
+                        <li onClick={handleIncrement} class="icon-product"><span><AddCircleIcon/></span></li>
                     </ul>
-                    <div>
-                        <Modal
-                            open={open}
-                            onClose={handleClose}
-                            aria-labelledby="modal-modal-title"
-                            aria-describedby="modal-modal-description"
-                        >
-                            <Box sx={style}>
-                            <Typography id="modal-modal-title" variant="h6" component="h2">
-                                
-                            </Typography>
-                            <Grid container>
-                            <IconButton size='small' onClick={handleDecrement}>
-                                <RemoveIcon fontSize="inherit"/>
-                            </IconButton>
-                            <input type='text' style={{borderWidth: '0.5px', borderTop: 'none', borderLeft: 'none', borderRight: 'none', textAlign: 'center', width: '100px'}} sx={{width: 1/2}} value={countValue} onChange={handleChange}/>
-                            <IconButton size='small' onClick={handleIncrement}>
-                                <AddIcon fontSize="inherit"/>
-                            </IconButton>
-                        </Grid>
-                            </Box>
-                        </Modal>
-                    </div>
             </div>
-            <small class="tag bg-red">sale</small>
+            <small class="tag bg-red">{tags[props.tag]}</small>
             <div class="title-product pt-4 pb-1">{heading}</div>
             <div class="d-flex align-content-center justify-content-center star">
                 <span><img src={require("../../../Assets/images/icon-star.png")}/></span>
@@ -104,7 +94,7 @@ const ProductCard = (props) => {
             </div>
             <h6 class="price">PHP {price}</h6>
             <Badge badgeContent={countValue} color="primary">
-                <button class="buy-1 btn btn-sm" onClick={handleClickCartIcon}>Add to Cart</button>
+                <button class="buy-1 btn btn-sm" onClick={handleClickCartIcon}><Typography>Add to Cart</Typography></button>
             </Badge>
             
         </div>  
