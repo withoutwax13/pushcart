@@ -13,12 +13,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Cart from './Cart';
 import Header from './Header';
 import Home from './Home';
-import {Products} from './Products';
+import Products from './Products';
 import store from '../store';
 import Login from './Login';
 import Register from './Register';
 import Footer from './Footer';
 import Checkout from './Checkout';
+import Orders from './Orders';
 
 const theme = createTheme({
   palette: {
@@ -68,6 +69,13 @@ function App() {
       <Route path='pushcart/checkout' element={
         <>
           {store.getState().user === null ? <Login/> : <Checkout/>}
+        </>
+      }/>
+      <Route path='pushcart/orders' element={
+        <>
+          <Header/>
+          <Orders/>
+          <Footer/>
         </>
       }/>
       </Routes>

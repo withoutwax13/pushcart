@@ -26,7 +26,7 @@ function Checkout(props) {
                         <Typography variant='h6'>Subtotal ({cart.reduce((a,b)=>{return a + Number(b.cartPush)}, 0)})</Typography>
                     </Grid>
                     <Grid item md={5} xs={6} sm={6} justifyContent='flex-end'>
-                        <Typography variant='h6' style={{opacity: '70%'}}><PhpIcon fontSize='large'/> {cart.reduce((a,b)=>{return a + (b.price*b.cartPush)}, 0)}</Typography>
+                        <Typography variant='h6' style={{opacity: '70%'}}><PhpIcon fontSize='large'/> {(Math.round(cart.reduce((a,b)=>{return a + (b.price*b.cartPush)}, 0)*100)/100).toFixed(2)}</Typography>
                     </Grid>
                 </Grid>
                 <Grid container spacing={2}>

@@ -203,7 +203,7 @@ export const Carousel = (props) => {
     )
 }
 
-export function Products (props) {
+export default function Products (props) {
 
     let deviceWidth = window.innerWidth
     || document.documentElement.clientWidth
@@ -425,7 +425,7 @@ export function Products (props) {
                                     <Carousel show={deviceWidth <= 700 ? 3 : 8}>
                                         {categories.map((category, index)=>{
                                             return <Col><button className="tablink" onClick={()=>{
-                                                setSubnavHighlight(index); categories[index].split(' ').forEach(((word, i)=>setChipData(chips=>chips.concat({key: chips.length + i, label: word }))));
+                                                setSubnavHighlight(index); setChipData([]); categories[index].split(' ').forEach(((word, i)=>{setChipData(chips=>chips.concat({key: chips.length + i, label: word }))}));
                                             }} key={index} id="defaultOpen"><Typography>{category.toUpperCase()}</Typography></button></Col>
                                         })}
                                     </Carousel>

@@ -1,3 +1,5 @@
+import API from "../API"
+
 export const addToCart = (product) => {
     return {
         type: "ADD_ITEM",
@@ -27,4 +29,35 @@ export const logoutCurrentUser = () => {
         type: "LOGOUT_USER",
         payload: null
     }
+}
+
+export const changeProductCategory = (categoryIndex) => {
+    return {
+        type: "CHANGE_CATEGORY",
+        payload: categoryIndex
+    }
+}
+
+export const setFilter = (selectedFilter) => {
+    return {
+        type: "SET_FILTER",
+        payload: selectedFilter
+    }
+}
+
+export const resetFilter = () => {
+    return {
+        type: "RESET_FILTER"
+    }
+}
+
+// fetch products based on filter
+export const getProducts = (filter) => async dispatch => {
+    API.get(`product/price=${filter}`) //with filter eme here
+        .then((response)=>{
+            dispatch({
+                type: "GET_PRODUCTS",
+                payload: response.data
+            })
+        })
 }

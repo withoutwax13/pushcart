@@ -35,7 +35,29 @@ const userReducer = (userState = null, action) => {
     }
 }
 
+
+const filterReducer = (filterState = {price: {min: 0, max: 10000}, category: 0, stock: {min: 0, max: 1000}, tags: []}, action) => {
+    switch(action.type){
+        case "SET_FILTER":
+            return action.payload
+        case "RESET_FILTER":
+            return {price: {min: 0, max: 10000}, category: 0, stock: {min: 0, max: 1000}, tags: []}
+        default:
+            return filterState
+    }
+}
+
+const productsReducer = (productsState = [], action) => {
+    switch(action.type){
+        case "GET_PRODUCTS":
+            return action.payload
+        default:
+            return productsState
+    }
+}
+
 export default combineReducers({
 	cart: cartReducer,
-    user: userReducer
+    user: userReducer,
+    filter: filterReducer
 })
