@@ -52,7 +52,7 @@ const categories = [
     "Electronics",
     "Furniture",
     "Kitchenware",
-    "Outdoor & Garden"
+    "Outdoor & Garden",
 ]
 
 const products = [
@@ -118,7 +118,7 @@ const products = [
     }
 ]
 
-const Carousel = (props) => {
+export const Carousel = (props) => {
     const {children, show} = props
 
     const [currentIndex, setCurrentIndex] = React.useState(0)
@@ -203,7 +203,7 @@ const Carousel = (props) => {
     )
 }
 
-export default function Products (props) {
+export function Products (props) {
 
     let deviceWidth = window.innerWidth
     || document.documentElement.clientWidth
@@ -223,7 +223,7 @@ export default function Products (props) {
         return `php ${value}`;
     }
 
-    const [state, setState] = React.useState({
+    const [dir, setDir] = React.useState({
         top: false,
         left: false,
         bottom: false,
@@ -241,7 +241,7 @@ export default function Products (props) {
         ) {
         return;
     }
-        setState({ ...state, [anchor]: open });
+        setDir({ ...dir, [anchor]: open });
     };
 
     // for the chip component
@@ -450,7 +450,7 @@ export default function Products (props) {
                 </div>
                 <SwipeableDrawer
                     anchor={'left'}
-                    open={state['left']}
+                    open={dir['left']}
                     onClose={toggleDrawer('left', false)}
                     onOpen={toggleDrawer('left', true)}
                 >

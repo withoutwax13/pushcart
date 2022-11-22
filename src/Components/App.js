@@ -12,10 +12,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Cart from './Cart';
 import Header from './Header';
 import Home from './Home';
-import Products from './Products';
+import {Products} from './Products';
 import store from '../store';
 import Login from './Login';
 import Register from './Register';
+import Footer from './Footer';
 
 const theme = createTheme({
   palette: {
@@ -45,6 +46,7 @@ function App() {
         <>
           <Header/>
           <Home/>
+          <Footer/>
         </>
       }/>
       <Route path='pushcart/login' element={<Login/>}/>

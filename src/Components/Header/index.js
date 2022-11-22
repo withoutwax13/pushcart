@@ -8,7 +8,7 @@ import Badge from '@mui/material/Badge';
 import store from '../../store'
 import { useEffect, useState } from 'react';
 import { Container } from '@mui/system';
-import { Typography, Button } from '@mui/material';
+import { Typography } from '@mui/material';
 
 import * as React from 'react'; 
 import Menu from '@mui/material/Menu';
@@ -17,7 +17,33 @@ import MenuItem from '@mui/material/MenuItem';
 import {Link} from 'react-router-dom'
 
 
+
 const Header = () => {
+    const categories = [
+        {id: 0, categLabel: "Tops", categGroup: "Women", imgFile: "crop-top.png"},
+        {id: 1, categLabel: "Bottoms", categGroup: "Women", imgFile: "skirt.png"},
+        {id: 2, categLabel: "Dresses", categGroup: "Women", imgFile: "dress.png"},
+        {id: 3, categLabel: "Bags", categGroup: "Women", imgFile: "fbags.png"},
+        {id: 4, categLabel: "Shoes", categGroup: "Women", imgFile: "fshoes.png"},
+        {id: 5, categLabel: "Accessories", categGroup: "Women", imgFile: "jewelry.png"},
+        {id: 6, categLabel: "Tops", categGroup: "Men", imgFile: "shirt.png"},
+        {id: 7, categLabel: "Bottoms", categGroup: "Men", imgFile: "shorts.png"},
+        {id: 8, categLabel: "Formal Wear", categGroup: "Men", imgFile: "suit.png"},
+        {id: 9, categLabel: "Bags", categGroup: "Men", imgFile: "mbag.png"},
+        {id: 10, categLabel: "Shoes", categGroup: "Men", imgFile: "mshoes.png"},
+        {id: 11, categLabel: "Accessories", categGroup: "Men", imgFile: "watch.png"},
+        {id: 12, categLabel: "Tops", categGroup: "Kid", imgFile: "ktops.png"},
+        {id: 13, categLabel: "Bottoms", categGroup: "Kid", imgFile: "kpants.png"},
+        {id: 14, categLabel: "Bags", categGroup: "Kid", imgFile: "kbags.png"},
+        {id: 15, categLabel: "Shoes", categGroup: "Kid", imgFile: "kshoes.png"},
+        {id: 16, categLabel: "Baby Products", categGroup: "Kid", imgFile: "bproducts.png"},
+        {id: 17, categLabel: "Toys", categGroup: "Kid", imgFile: "toys.png"},
+        {id: 18, categLabel: "Home & Living", categGroup: "Home", imgFile: "h-entertainment.png"},
+        {id: 19, categLabel: "Electronics", categGroup: "Home", imgFile: "h-oven.png"},
+        {id: 20, categLabel: "Furniture", categGroup: "Home", imgFile: "h-chair.png"},
+        {id: 21, categLabel: "Kitchenware", categGroup: "Home", imgFile: "h-kitchen.png"},
+        {id: 22, categLabel: "Outdoor & Garden", categGroup: "Home", imgFile: "h-garden.png"},
+    ]
     const [cartItems, setcartItems] = useState(0)
     useEffect(()=>setcartItems(store.getState().cart.length), [store.getState().cart.length])
 
@@ -31,7 +57,7 @@ const Header = () => {
     };
 
     return (
-        <nav className="navbar navbar-expand-lg">
+        <nav className="navbar navbar-expand-lg sticky-top">
             <div className="container-fluid">
                 <Link className="navbar-brand" to={`/pushcart`}><h4>PushCart</h4></Link>
                 <button 
@@ -50,164 +76,80 @@ const Header = () => {
                          </a>
                          <div className="dropdown-menu megamenu" role="menu">
                              <div className="row g-3">
+
                              <div className="col-lg-3 col-6">
                                  <div className="col-megamenu">
                                  <div className="form-check pb-2">
                                      <h5 className="title">Women</h5>
                                      <ul className="list-unstyled">
-                                         <li>
-                                             <img src={require(`../../Assets/images/crop-top.png`)} width="50"/>
-                                             <a href=""><label className="form-check-label" for="flexCheckDefault">Tops</label></a>
-                                         </li>
-
-                                         <li>
-                                             <img src={require("../../Assets/images/skirt.png")} width="50"/>
-                                             <a href=""><label className="form-check-label" for="flexCheckDefault">Bottoms</label></a>
-                                         </li>
-
-                                         <li>
-                                             <img src={require("../../Assets/images/dress.png")} width="50"/>
-                                             <a href=""><label className="form-check-label" for="flexCheckDefault">Dresses</label></a>
-                                         </li>
-
-                                         <li>
-                                             <img src={require("../../Assets/images/fbags.png")} width="50"/>
-                                             <a href=""><label className="form-check-label" for="flexCheckDefault">Bags</label></a>
-                                         </li>
-
-                                         <li>
-                                             <img src={require("../../Assets/images/fshoes.png")} width="50"/>
-                                             <a href=""><label className="form-check-label" for="flexCheckDefault">Shoes</label></a>
-                                         </li>
-
-                                         <li>
-                                             <img src={require("../../Assets/images/jewelry.png")} width="50"/>
-                                             <a href=""><label className="form-check-label" for="flexCheckDefault">Accessories</label></a>
-                                         </li>
-                                     </ul>
-                                 </div>
-                                 </div>
-                                
-                                 </div>
-                                
-                                 <div className="col-lg-3 col-6">
+                                        {categories.filter(category=>category.categGroup === "Women").map(category=>{
+                                            return (
+                                                <li>
+                                                    <img src={require(`../../Assets/images/${category.imgFile}`)}
+                                                     width="50"/>
+                                                    <Link to={`/pushcart/products`} state={{category}}><label className="form-check-label" for="flexCheckDefault">{category.categLabel}</label></Link>
+                                                </li>
+                                            )
+                                        })}
+                                    </ul>
+                                </div>
+                                </div>
+                            </div>
+                            <div className="col-lg-3 col-6">
                                  <div className="col-megamenu">
-                                     <div className="form-check pb-2">
+                                 <div className="form-check pb-2">
                                      <h5 className="title">Men</h5>
-                                         <ul className="list-unstyled">
-                                         <li>
-                                             <img src={require("../../Assets/images/shirt.png")} width="50"/>
-                                             <a href=""><label className="form-check-label" for="flexCheckDefault">Tops</label></a>
-                                         </li>
-
-                                         <li>
-                                             <img src={require("../../Assets/images/shorts.png")} width="50"/>
-                                             <a href=""><label className="form-check-label" for="flexCheckDefault">Bottoms</label></a>
-                                         </li>
-
-                                         <li>
-                                             <img src={require("../../Assets/images/suit.png")} width="50"/>
-                                             <a href=""><label className="form-check-label" for="flexCheckDefault">Formal Wear</label></a>
-                                         </li>
-
-                                         <li>
-                                             <img src={require("../../Assets/images/mbag.png")} width="50"/>
-                                             <a href=""><label className="form-check-label" for="flexCheckDefault">Bags</label></a>
-                                         </li>
-
-                                         <li>
-                                             <img src={require("../../Assets/images/mshoes.png")} width="50"/>
-                                             <a href=""><label className="form-check-label" for="flexCheckDefault">Shoes</label></a>
-                                         </li>
-
-                                         <li>
-                                             <img src={require("../../Assets/images/watch.png")} width="50"/>
-                                             <a href=""><label className="form-check-label" for="flexCheckDefault">Accessories</label></a>
-                                         </li>
-                                         </ul>
-                                     </div>
-                                     </div>
-                                
-                                 </div>
-                                
-                                 <div className="col-lg-3 col-6">
-                                 <div className="col-megamenu">
-                                     <div className="form-check">
-                                     <h5 className="title">Kids</h5>
                                      <ul className="list-unstyled">
-                                         <li>
-                                             <img src={require("../../Assets/images/ktops.png")} width="50"/>
-                                             <a href=""><label className="form-check-label" for="flexCheckDefault">Tops</label></a>
-                                         </li>
-
-                                         <li>
-                                             <img src={require("../../Assets/images/kpants.png")} width="50"/>
-                                             <a href=""><label className="form-check-label" for="flexCheckDefault">Bottoms</label></a>
-                                         </li>
-
-                                         <li>
-                                             <img src={require("../../Assets/images/kbags.png")} width="50"/>
-                                             <a href=""><label className="form-check-label" for="flexCheckDefault">Bags</label></a>
-                                         </li>
-
-                                         <li>
-                                             <img src={require("../../Assets/images/kshoes.png")} width="50"/>
-                                             <a href=""><label className="form-check-label" for="flexCheckDefault">Shoes</label></a>
-                                         </li>
-
-                                         <li>
-                                             <img src={require("../../Assets/images/bproducts.png")} width="50"/>
-                                             <a href=""><label className="form-check-label" for="flexCheckDefault">Baby Products</label></a>
-                                         </li>
-
-                                         <li>
-                                             <img src={require("../../Assets/images/toys.png")} width="50"/>
-                                             <a href=""><label className="form-check-label" for="flexCheckDefault">Toys</label></a>
-                                         </li>
-                                     </ul>
-                                     </div>
-                                 </div>
-                                
-                                 </div>
-                                 <div className="col-lg-3 col-6">
+                                        {categories.filter(category=>category.categGroup === "Men").map(category=>{
+                                            return (
+                                                <li>
+                                                    <img src={require(`../../Assets/images/${category.imgFile}`)}
+                                                     width="50"/>
+                                                    <Link to={`/pushcart/products`} state={{category}}><label className="form-check-label" for="flexCheckDefault">{category.categLabel}</label></Link>
+                                                </li>
+                                            )
+                                        })}
+                                    </ul>
+                                </div>
+                                </div>
+                            </div>
+                            <div className="col-lg-3 col-6">
                                  <div className="col-megamenu">
-                                     <div className="form-check">
+                                 <div className="form-check pb-2">
+                                     <h5 className="title">Kid</h5>
+                                     <ul className="list-unstyled">
+                                        {categories.filter(category=>category.categGroup === "Kid").map(category=>{
+                                            return (
+                                                <li>
+                                                    <img src={require(`../../Assets/images/${category.imgFile}`)}
+                                                     width="50"/>
+                                                    <Link to={`/pushcart/products`} state={{category}}><label className="form-check-label" for="flexCheckDefault">{category.categLabel}</label></Link>
+                                                </li>
+                                            )
+                                        })}
+                                    </ul>
+                                </div>
+                                </div>
+                            </div>
+                            <div className="col-lg-3 col-6">
+                                 <div className="col-megamenu">
+                                 <div className="form-check pb-2">
                                      <h5 className="title">Home</h5>
-                                         <ul className="list-unstyled">
-                                         <li>
-                                             <img src={require("../../Assets/images/h-entertainment.png" )} width="60"/>
-                                             <a href=""><label className="form-check-label" for="flexCheckDefault">Home Entertainment</label></a>
-                                         </li>
-
-                                         <li>
-                                             <img src={require("../../Assets/images/h-oven.png")} width="50"/>
-                                             <a href=""><label className="form-check-label" for="flexCheckDefault">Home & Living</label></a>
-                                         </li>
-
-                                         <li>
-                                             <img src={require("../../Assets/images/h-pc.png")} width="50"/>
-                                             <a href=""><label className="form-check-label" for="flexCheckDefault">Electronics</label></a>
-                                         </li>
-
-                                         <li>
-                                             <img src={require("../../Assets/images/h-chair.png")} width="50"/>
-                                             <a href=""><label className="form-check-label" for="flexCheckDefault">Furniture</label></a>
-                                         </li>
-
-                                         <li>
-                                             <img src={require("../../Assets/images/h-kitchen.png")} width="50"/>
-                                             <a href=""><label className="form-check-label" for="flexCheckDefault">Kitchenware</label></a>
-                                         </li>
-
-                                         <li>
-                                             <img src={require("../../Assets/images/h-garden.png")} width="50"/>
-                                             <a href=""><label className="form-check-label" for="flexCheckDefault">Outdoor & Garden</label></a>
-                                         </li>
-                                         </ul>
-                                     </div>
-                                 </div>
-                                
-                                 </div>
+                                     <ul className="list-unstyled">
+                                        {categories.filter(category=>category.categGroup === "Home").map(category=>{
+                                            return (
+                                                <li>
+                                                    <img src={require(`../../Assets/images/${category.imgFile}`)}
+                                                     width="50"/>
+                                                    <Link to={`/pushcart/products`} state={{category}}><label className="form-check-label" for="flexCheckDefault">{category.categLabel}</label></Link>
+                                                </li>
+                                            )
+                                        })}
+                                    </ul>
+                                </div>
+                                </div>
+                            </div>
+                            
                             
                              </div>
                             <Container className='text-center'><Link to={`/pushcart/products`}><Typography variant='h6'>See all</Typography><KeyboardDoubleArrowDownIcon/></Link></Container>
@@ -231,9 +173,10 @@ const Header = () => {
                         MenuListProps={{
                         'aria-labelledby': 'basic-button',
                         }}
+                        className='text-center'
                     >
-                        <MenuItem><Link className='nav-categories nav-link px-1' to={`/pushcart/setting`}>My Settings</Link></MenuItem>
-                        <MenuItem><Link className='nav-categories nav-link px-1' to={`/pushcart/login`}>Login/Register</Link></MenuItem>
+                        {/* <Typography variant='h5' className='nav-categories nav-link px-1'>{Object.keys(store.getState().user).length === 0 ? `Hi, User!` : `Hi, ${store.getState().user.first_name}`}</Typography> */}
+                        <MenuItem><Link className='nav-categories nav-link px-1' to={Object.keys(store.getState().user).length === 0 ? `/pushcart/login` : `/pushcart`}>{Object.keys(store.getState().user).length === 0 ? `Login/Register` : `Logout`}</Link></MenuItem>
                     </Menu>
                     <Link to={`/pushcart/cart`} className='nav-categories nav-link px-1'>
                         <Badge badgeContent={cartItems} color="secondary">
