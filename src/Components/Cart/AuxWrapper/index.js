@@ -7,7 +7,7 @@ function AuxWrapper({cart}) {
     return (
         <Container>
             <Stack spacing={1} style={{position: 'fixed'}}>
-                <Checkout cartData={(new Date()).getMilliseconds()}/>
+                <Checkout/>
                 <Voucher/>
             </Stack>
         </Container>

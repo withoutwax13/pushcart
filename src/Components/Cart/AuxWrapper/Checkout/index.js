@@ -1,14 +1,14 @@
 import {Box, Stack, Button, Grid, Typography, Divider} from '@mui/material'
 import { useEffect, useState } from 'react';
+import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-
-import PhpIcon from '@mui/icons-material/Php';
 
 import store from '../../../../store'
 
-function Checkout({cartData}) {
-    let [cart, setCart] = useState(store.getState().cart)
-    useEffect(()=>setCart(store.getState().cart), [cartData])
+import PhpIcon from '@mui/icons-material/Php';
+
+function Checkout(props) {
+    let cart = store.getState().cart
     return (
         <Box
             sx={{
@@ -51,4 +51,9 @@ function Checkout({cartData}) {
     );
 }
 
-export default Checkout;
+const mapStateToProps = (state) => {
+    return {
+        cart: state.cart
+    }
+}
+export default connect(mapStateToProps)(Checkout);
