@@ -66,7 +66,7 @@ function Item({id, updateCart, removeFromCart}) {
                         {<Typography variant='h6'>{heading}</Typography>}
                     </Grid>
                     <Grid item md={3} justifyContent='flex-end' sx={{paddingTop: '5px', paddingBottom: '5px'}}>
-                        <Typography variant='h6' style={{fontWeight: '800'}}><PhpIcon fontSize='large'/>{` ${price}`}</Typography>
+                        <Typography variant='h6' style={{fontWeight: '800'}}><PhpIcon fontSize='large'/>{` ${(Math.round(price * 100)/100).toFixed(2)}`}</Typography>
                     </Grid>
                 </Grid>
                 <Grid container justifyContent="flex-end">

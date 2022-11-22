@@ -2,6 +2,7 @@ import * as React from 'react'
 import {
   Routes,
   Route,
+  Link,
 } from "react-router-dom"
 import {
   ThemeProvider, 
@@ -17,6 +18,7 @@ import store from '../store';
 import Login from './Login';
 import Register from './Register';
 import Footer from './Footer';
+import Checkout from './Checkout';
 
 const theme = createTheme({
   palette: {
@@ -61,6 +63,11 @@ function App() {
         <>
           <Header/>
           <Cart/>
+        </>
+      }/>
+      <Route path='pushcart/checkout' element={
+        <>
+          {store.getState().user === null ? <Login/> : <Checkout/>}
         </>
       }/>
       </Routes>

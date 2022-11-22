@@ -1,5 +1,6 @@
 import {Box, Stack, Button, Grid, Typography, Divider} from '@mui/material'
 import { useEffect, useState } from 'react';
+import {Link} from 'react-router-dom'
 
 import PhpIcon from '@mui/icons-material/Php';
 
@@ -16,7 +17,9 @@ function Checkout({cartData}) {
             style={{boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px', padding: '10% 10%'}}>
             <Stack spacing={2}>
                 <Button fullWidth={true} color='secondary' variant="contained" size="large" style={{borderRadius: '50px'}}>
-                    CONTINUE TO CHECKOUT
+                    <Link to={`/pushcart/checkout`} style={{color: 'inherit'}}>
+                        CONTINUE TO CHECKOUT
+                    </Link>
                 </Button>
                 <Grid container spacing={2}>
                     <Grid item md={7} xs={6} sm={6}>
@@ -40,7 +43,7 @@ function Checkout({cartData}) {
                         <Typography variant='h6'>Estimated Total</Typography>
                     </Grid>
                     <Grid item md={5} xs={6} sm={6}>
-                        <Typography variant='h6'><PhpIcon fontSize='large'/> {cart.reduce((a,b)=>{return a + (b.price*b.cartPush)}, 0)}</Typography>
+                        <Typography variant='h6'><PhpIcon fontSize='large'/> {(Math.round(cart.reduce((a,b)=>a + (b.price * b.cartPush), 0) * 100)/100).toFixed(2)}</Typography>
                     </Grid>
                 </Grid>
             </Stack>
