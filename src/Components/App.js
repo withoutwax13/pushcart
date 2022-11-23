@@ -55,7 +55,7 @@ function App({getProducts}) {
           <Footer/>
         </>
       }/>
-      <Route path='pushcart/login' element={<Login/>}/>
+      <Route path='pushcart/login' element={ <Login/>}/>
       <Route path='pushcart/register' element={<Register/>}/>
       <Route path='pushcart/products' element={
         <>

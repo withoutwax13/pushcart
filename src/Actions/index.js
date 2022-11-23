@@ -61,3 +61,30 @@ export const getProducts = (filter) => async dispatch => {
             })
         })
 }
+
+export const login = (creds) => async dispatch => {
+    API.get('customers')
+        .then((response)=>{
+            let customers = response.data.data,
+                user = customers.filter(e=>e.email_address===creds.email_address)[0]
+            if(user.password === creds.password){
+                dispatch({
+                    type: "LOGIN_USER",
+                    payload: user
+                })
+            }
+
+        })
+}
+
+export const getOrders = (cust_id) => async dispatch => {
+    API.get(`orders`) //with filter eme here if possible
+        .then((response)=>{
+            let orders = response.data.data,
+                userOrder = orders.filter(e=>e.customer_id===cust_id)
+                dispatch({
+                    type: "LOGIN_USER",
+                    payload: userOrder
+                })
+        })
+}

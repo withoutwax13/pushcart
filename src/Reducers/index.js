@@ -1,13 +1,15 @@
 import { combineReducers } from 'redux'
 
 const cartReducer = (cartState = [], action) => {
+    
+    console.log(cartState)
     switch(action.type){
         case 'ADD_ITEM':
             if(action.payload.cartPush === 0){
                 return cartState
             }
-            if(cartState.findIndex(item=>item.id === action.payload.id) !== -1){
-                let index = cartState.findIndex(e=>e.id === action.payload.id)
+            if(cartState.findIndex(item=>item.product_id === action.payload.product_id) !== -1){
+                let index = cartState.findIndex(e=>e.product_id === action.payload.product_id)
                 let nState = [...cartState]
                 let sum = action.payload.cartPush + nState[index].cartPush
                 nState[index].cartPush = sum > nState[index].stock ? nState[index].stock : sum
@@ -15,9 +17,9 @@ const cartReducer = (cartState = [], action) => {
             }
             return cartState.concat(action.payload)
         case 'REMOVE_ITEM':
-            return cartState.filter((item)=>item.id !== action.payload)
+            return cartState.filter((item)=>item.product_id !== action.payload)
         case 'UPDATE_ITEM':
-            let index = cartState.findIndex(e=>e.id === action.payload.id)
+            let index = cartState.findIndex(e=>e.product_id === action.payload.id)
             let nState = [...cartState]
             nState[index] = action.payload.newUpdate
             return nState
@@ -29,6 +31,9 @@ const cartReducer = (cartState = [], action) => {
 const userReducer = (userState = null, action) => {
     switch(action.type){
         case "LOGOUT_USER":
+            return action.payload
+        case "LOGIN_USER":
+            console.log(action.payload)
             return action.payload
         default:
             return userState
@@ -56,9 +61,19 @@ const productsReducer = (productsState = [], action) => {
     }
 }
 
+const ordersReducer = (ordersState = [], action) => {
+    switch(action.type){
+        case "GET_ORDERS":
+            return action.payload
+        default:
+            return ordersState
+    }
+}
+
 export default combineReducers({
 	cart: cartReducer,
     user: userReducer,
     filter: filterReducer,
-    products: productsReducer
+    products: productsReducer,
+    orders: ordersReducer
 })

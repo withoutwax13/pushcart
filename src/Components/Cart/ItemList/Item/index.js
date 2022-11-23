@@ -13,13 +13,13 @@ function Item({id, updateCart, removeFromCart}) {
 
     let cart = store.getState().cart
     
-    let [itemData, setItemData] = useState(cart.filter(e=>e.id === id)[0])
+    let [itemData, setItemData] = useState(cart.filter(e=>e.product_id === id)[0])
     
-    var { img, heading, price, stock, cartPush } = itemData
+    var { image, product_name, price, stock, cartPush } = itemData
     
     const [cartItemCount, setItemCount] = useState(cartPush)
     
-    useEffect(()=>{setItemData(cart.filter(e=>e.id === id)[0])})
+    useEffect(()=>{setItemData(cart.filter(e=>e.product_id === id)[0])})
     const updatePushCartData = () => {
         let nData = {...itemData, cartPush: cartItemCount}
         updateCart(id, nData)
@@ -69,7 +69,7 @@ function Item({id, updateCart, removeFromCart}) {
                         <Box>Image here</Box>
                     </Grid>
                     <Grid item md={7} sx={{paddingTop: '5px', paddingBottom: '5px'}}>
-                        {<Typography variant='h6'>{heading} {stock}</Typography>}
+                        {<Typography variant='h6'>{product_name}</Typography>}
                     </Grid>
                     <Grid item md={3} justifyContent='flex-end' sx={{paddingTop: '5px', paddingBottom: '5px'}}>
                         <Typography variant='h6' style={{fontWeight: '800'}}><PhpIcon fontSize='large'/>{` ${(Math.round(price*100)/100).toFixed(2)}`}</Typography>

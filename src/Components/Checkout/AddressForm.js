@@ -4,13 +4,14 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import { connect } from 'react-redux';
 
-export default function AddressForm(props) {
+function AddressForm(props) {
+  const user = props.user
     // var { houseNum, street, brgy, city, province, postalCode } = props.address
     // var { firstName, lastName } = props.user
-    var houseNum = '#123', street = 'Anywhere St', brgy = 'Brgy', city = 'Anywhere City', province = 'Camarines Sur', postalCode = 1120,
-        firstName = "Juan", lastName = "Dela Cruz";
-    React.useEffect(()=>props.handler({address: `${houseNum} ${street}, ${brgy}, ${city}, ${province}, Philippines ${postalCode}`, name: `${firstName} ${lastName}`}), [props])
+
+    React.useEffect(()=>props.handler({address: `${user.address_line_1} ${user.address_line_1}, ${user.city}, Philippines ${user.postalCode}`, name: `${user.first_name} ${user.last_name}`}), [props])
   return (
     <React.Fragment>
       <Typography sx={{marginBottom: '30px'}} variant="h4" gutterBottom>
@@ -19,20 +20,28 @@ export default function AddressForm(props) {
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <Typography variant='h6'>
-            <b>First Name:</b> {firstName}
+            <b>First Name:</b> {user.first_name}
           </Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
         <Typography variant='h6'>
-            <b>Last Name:</b> {lastName}
+            <b>Last Name:</b> {user.last_name}
           </Typography>
         </Grid>
         <Grid item xs={12}>
             <Typography variant='h6'>
-                <b>Address:</b> {`${houseNum} ${street}, ${brgy}, ${city}, ${province}, Philippines ${postalCode}`}
+                <b>Address:</b> {`${user.address_line_1}, ${user.address_line_2}, ${user.city}, Philippines ${user.postalCode}`}
           </Typography>
         </Grid>
       </Grid>
     </React.Fragment>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps)(AddressForm)

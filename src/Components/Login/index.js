@@ -11,6 +11,9 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
+import { connect } from 'react-redux';
+import {login} from '../../Actions'
+import { Password } from '@mui/icons-material';
 
 function Copyright(props) {
   return (
@@ -25,15 +28,10 @@ function Copyright(props) {
   );
 }
 
-export default function Login() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+function Login({login}) {
+  
+  const [email_address, setemail] = React.useState("")
+  const [pw, setpw] = React.useState("")
 
   return (
     
@@ -69,7 +67,7 @@ export default function Login() {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <Box sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 sx={{paddingY: '10px',marginY: '5px'}}
@@ -78,7 +76,8 @@ export default function Login() {
                 id="email"
                 label="Email Address"
                 name="email"
-                autoComplete="email"
+               value={email_address}
+               onChange={e=>setemail(e.target.value)}
                 autoFocus
               />
               <TextField
@@ -93,14 +92,15 @@ export default function Login() {
                 label="Password"
                 type="password"
                 id="password"
-                autoComplete="current-password"
-              />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
+                value={pw}
+               onChange={e=>setpw(e.target.value)}
               />
               <Button
-                type="submit"
+                onClick={()=>{
+                  if(email_address !== "" && Password !== ""){
+                    login({email_address: email_address, password: pw})
+                  }
+                }}
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
@@ -122,3 +122,11 @@ export default function Login() {
     
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps, {login})(Login)

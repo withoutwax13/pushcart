@@ -413,7 +413,7 @@ function Products (props) {
         setSubnavHighlight(0)
         // etc
     }
-
+    
     console.log(props.products)
     
     return (

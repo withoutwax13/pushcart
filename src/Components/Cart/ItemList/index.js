@@ -6,7 +6,8 @@ const fakeUser = {address: "145 Tonyo St., Tondo, Manila, Philippines 1012"}
 function ItemList({cart, updateCart}) {
     const displayItems = () => {
         if(cart.length != 0){
-            return cart.map((item)=><Container key={item.id}><Item id={item.id}/><Divider variant="middle" /></Container>)
+            console.log("cart", cart)
+            return cart.map((item)=><Container key={item.product_id}><Item id={item.product_id}/><Divider variant="middle" /></Container>)
         }else{
             return <Typography variant='h5' alignSelf='center'>No items in the cart.</Typography>
         }

@@ -1,49 +1,7 @@
+import { connect } from 'react-redux'
 import ProductCard from '../../Products/ProductCard'
 
-const products = [
-  {
-      id: 0,
-      img: null,
-      heading: "Polo & Shorts set",
-      productImage1: `prod_example_card_1.webp`,
-      productImage2: `prod_example_card_2.webp`,
-      price: 18.50,
-      stock: 40,
-      cartPush: 0
-  },
-  {
-      id: 1,
-      img: null,
-      heading: "Polo & Shorts set",
-      productImage1: `prod_example_card_1.webp`,
-      productImage2: `prod_example_card_2.webp`,
-      price: 48.00,
-      stock: 5,
-      cartPush: 0
-  },
-  {
-      id: 2,
-      img: null,
-      heading: "Polo & Shorts set",
-      productImage1: `prod_example_card_1.webp`,
-      productImage2: `prod_example_card_2.webp`,
-      price: 520.50,
-      stock: 9,
-      cartPush: 0
-  },
-  {
-      id: 3,
-      img: null,
-      heading: "Polo & Shorts set",
-      productImage1: `prod_example_card_1.webp`,
-      productImage2: `prod_example_card_2.webp`,
-      price: 38.50,
-      stock: 6,
-      cartPush: 0
-  },
-]
-
-const DailyDiscover = ({addToCart}) => {
+const DailyDiscover = ({addToCart, products}) => {
   const tagRandomizer = () => Math.floor(Math.random() * 3)
     return (
         <div className="col-lg-12 col-12">
@@ -53,7 +11,7 @@ const DailyDiscover = ({addToCart}) => {
           <div className="container">
             <div className="row">
               {/* <!-- DAILY DISCOVER 1 --> */}
-              {products.map((product, index)=>{
+              {products.data.filter((prod, i)=>i<8).map((product, index)=>{
                 return(
                   <ProductCard tag={tagRandomizer()} key={index} data={product}/>
                 )
@@ -69,4 +27,10 @@ const DailyDiscover = ({addToCart}) => {
     )
 }
 
-export default DailyDiscover
+const mapStateToProps = (state) => {
+  return {
+      products: state.products
+  }
+}
+
+export default connect(mapStateToProps)(DailyDiscover)
