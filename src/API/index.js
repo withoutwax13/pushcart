@@ -1,5 +1,5 @@
 import axios from 'axios'
 
 export default axios.create({
-	baseURL: 'https://api.pushcart.com/' //api baseurl
+	baseURL: 'https://pushcart-api-kodego.vercel.app/' //api baseurl
 })

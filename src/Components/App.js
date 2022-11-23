@@ -1,4 +1,7 @@
 import * as React from 'react'
+import {connect} from 'react-redux'
+import { getProducts } from '../Actions'
+
 import {
   Routes,
   Route,
@@ -40,8 +43,8 @@ const theme = createTheme({
   }
 });
 
-function App() {
-  
+function App({getProducts}) {
+  getProducts()
   return (
     <ThemeProvider theme={theme}>
       <Routes>
@@ -83,4 +86,4 @@ function App() {
   );
 }
 
-export default App;
+export default connect(null, {getProducts})(App);

@@ -59,5 +59,6 @@ const productsReducer = (productsState = [], action) => {
 export default combineReducers({
 	cart: cartReducer,
     user: userReducer,
-    filter: filterReducer
+    filter: filterReducer,
+    products: productsReducer
 })

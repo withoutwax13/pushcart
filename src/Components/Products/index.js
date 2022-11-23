@@ -28,6 +28,7 @@ import Paper from '@mui/material/Paper';
 import ProductCard from './ProductCard';
 
 import { Container, Row, Col } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
 const categories = [
     "Women Tops",
@@ -203,7 +204,7 @@ export const Carousel = (props) => {
     )
 }
 
-export default function Products (props) {
+function Products (props) {
 
     let deviceWidth = window.innerWidth
     || document.documentElement.clientWidth
@@ -412,6 +413,8 @@ export default function Products (props) {
         setSubnavHighlight(0)
         // etc
     }
+
+    console.log(props.products)
     
     return (
         <div>
@@ -441,7 +444,7 @@ export default function Products (props) {
                     
                         <div class="container ">
                             <div class="row">
-                                {products.map((product,index)=>{
+                                {props.products.data.map((product,index)=>{
                                     return (
                                         <ProductCard tag={tagRandomizer()} key={index} data={product}/>
                                     )
@@ -463,3 +466,11 @@ export default function Products (props) {
         </div>
   );
 }
+
+const mapStateToProps = (state) => {
+    return {
+        products: state.products
+    }
+}
+
+export default connect(mapStateToProps)(Products)

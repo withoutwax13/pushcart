@@ -29,7 +29,7 @@ const style = {
 
 const ProductCard = (props) => {
     const tags = ["NEW", "HOT", "BEST BUY"]
-    const {id, productImage1, productImage2, price, heading, stock} = props.data
+    const {product_id, image, price, product_name, stock} = props.data
     const [countValue, setCountValue] = useState(0)
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -69,8 +69,8 @@ const ProductCard = (props) => {
     return (
         <div class="col-lg-3 col-sm-6 pb-3 d-flex flex-column align-items-center justify-content-center product-item my-3 border border dark">
             <div class="product">
-                <img class="pic-1" src={require(`../../../Assets/images/${productImage1}`)}/>
-                <img class="pic-2" src={require(`../../../Assets/images/${productImage2}`)}/>
+                {/* <img class="pic-1" src={require(`../../../Assets/images/${image}`)}/>
+                <img class="pic-2" src={require(`../../../Assets/images/${image}`)}/> */}
                     <ul class="d-flex align-items-center justify-content-center list-unstyled icons">
                         <li onClick={handleDecrement} class="icon-product"><span><RemoveCircleIcon/></span></li>
                         <li class="icon-product">
@@ -84,7 +84,7 @@ const ProductCard = (props) => {
                     </ul>
             </div>
             <small class="tag bg-red">{tags[props.tag]}</small>
-            <div class="title-product pt-4 pb-1">{heading}</div>
+            <div class="title-product pt-4 pb-1">{product_name}</div>
             <div class="d-flex align-content-center justify-content-center star">
                 <span><img src={require("../../../Assets/images/icon-star.png")}/></span>
                 <span><img src={require("../../../Assets/images/icon-star.png")}/></span>

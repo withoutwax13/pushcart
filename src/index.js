@@ -11,7 +11,6 @@ import { persistStore } from 'redux-persist'
 import { BrowserRouter } from 'react-router-dom';
 
 import store from './store'
-
 // import { PersistGate } from 'redux-persist/integration/react'
 // import { persistStore, persistReducer } from 'redux-persist'
 // import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
@@ -21,7 +20,6 @@ import store from './store'
 //   storage,
 //   blacklist: ['user']
 // }
-
 // const persistedReducer = persistReducer(persistConfig, reducers)
 
 

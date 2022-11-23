@@ -23,7 +23,7 @@ const Home = () => {
             <div className="container">
                 <div class="row d-flex text-center ">
                     {/* <FlashSale/> */}
-                    <DailyDiscover/>
+                    {/* <DailyDiscover/> */}
                 </div>
             </div>
         </div>
