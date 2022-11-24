@@ -286,7 +286,7 @@ function Products (props) {
                                         name="radio-buttons-group"
                                         onChange={e=>setRadioCategSelect(e.target.value)}
                                     >
-                                        {categories.map((category, index)=><FormControlLabel value={index} control={<Radio />} label={category} />)}
+                                        {categories.map((category, index)=><FormControlLabel key={index} value={index} control={<Radio />} label={category} />)}
                                     </RadioGroup>
                                 </FormControl>
                             </Box>

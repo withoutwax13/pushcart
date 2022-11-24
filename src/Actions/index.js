@@ -1,5 +1,6 @@
 import API from "../API"
 
+// cart
 export const addToCart = (product) => {
     return {
         type: "ADD_ITEM",
@@ -24,6 +25,13 @@ export const updateCart = (itemID, newState) => {
     }
 }
 
+export const clearCart = () => {
+    return {
+        type: "CLEAR_CART"
+    }
+}
+
+// user
 export const logoutCurrentUser = () => {
     return {
         type: "LOGOUT_USER",
@@ -31,6 +39,7 @@ export const logoutCurrentUser = () => {
     }
 }
 
+// category
 export const changeProductCategory = (categoryIndex) => {
     return {
         type: "CHANGE_CATEGORY",
@@ -38,6 +47,7 @@ export const changeProductCategory = (categoryIndex) => {
     }
 }
 
+// filter
 export const setFilter = (selectedFilter) => {
     return {
         type: "SET_FILTER",
@@ -51,7 +61,8 @@ export const resetFilter = () => {
     }
 }
 
-// fetch products based on filter
+
+// products
 export const getProducts = (filter) => async dispatch => {
     API.get(`products`) //with filter eme here if possible
         .then((response)=>{
@@ -62,6 +73,13 @@ export const getProducts = (filter) => async dispatch => {
         })
 }
 
+export const clearProducts = () => {
+    return {
+        type: "CLEAR_PRODUCTS"
+    }
+}
+
+// user
 export const login = (creds) => async dispatch => {
     API.get('customers')
         .then((response)=>{
@@ -77,6 +95,8 @@ export const login = (creds) => async dispatch => {
         })
 }
 
+
+// orders
 export const getOrders = (cust_id) => async dispatch => {
     API.get(`orders`) //with filter eme here if possible
         .then((response)=>{

@@ -26,23 +26,16 @@ const style = {
   py: 4,
   px: 4
 };
-const LoadImage = ({src}) => {
-    const [loaded, setLoaded] = useState(false);
-
+const LoadImage = ({src, classNameStr}) => {
+    // const [loaded, setLoaded] = useState(false);
+    let img_src = null
+    try{
+        img_src = require(`../../../Assets/images/${src}`)
+    }catch{
+        img_src = 'https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-collection-4_large.png?format=jpg&quality=90&v=1530129177' 
+    }
     return (
-      <div>
-        {loaded ? (
-            <>
-                <img class="pic-1" src={require(`../../../Assets/images/${src}`)}/>
-                <img class="pic-2" src={require(`../../../Assets/images/${src}`)}/>
-            </>
-        ) : (
-            <>
-            <img class="pic-1" src='https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-collection-4_large.png?format=jpg&quality=90&v=1530129177'/>
-            <img class="pic-2" src='https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-collection-4_large.png?format=jpg&quality=90&v=1530129177'/>
-            </>
-        )}
-      </div>
+      <img class={classNameStr} src={img_src}/>
     );
 }
 const ProductCard = (props) => {
@@ -90,7 +83,8 @@ const ProductCard = (props) => {
     return (
         <div class="col-lg-3 col-sm-6 pb-3 d-flex flex-column align-items-center justify-content-center product-item my-3 border border dark">
             <div class="product">
-                <LoadImage src={image}/>
+                <LoadImage src={image} classNameStr="pic-1"/>
+                <LoadImage src={image} classNameStr="pic-2"/>
                 {/* <img class="pic-1" src={require(`../../../Assets/images/${image}`)}/>
                 <img class="pic-2" src={require(`../../../Assets/images/${image}`)}/> */}
                     <ul class="d-flex align-items-center justify-content-center list-unstyled icons">

@@ -24,7 +24,7 @@ import categories from '../../API/categories';
 const Header = ({user, cart, logoutCurrentUser, changeProductCategory}) => {
     
     const [cartItems, setcartItems] = useState(0)
-    useEffect(()=>setcartItems(cart.length), [cart])
+    useEffect(()=>setcartItems(cart.reduce((a,b)=>a+(b.cartPush), 0), [cart]))
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);

@@ -23,6 +23,8 @@ const cartReducer = (cartState = [], action) => {
             let nState = [...cartState]
             nState[index] = action.payload.newUpdate
             return nState
+        case 'CLEAR_CART':
+            return []
         default:
             return cartState
     }
@@ -56,6 +58,8 @@ const productsReducer = (productsState = [], action) => {
     switch(action.type){
         case "GET_PRODUCTS":
             return action.payload
+        case "CLEAR_PRODUCTS":
+            return []
         default:
             return productsState
     }

@@ -4,6 +4,8 @@ import FlashSale from "./FlashSale"
 import LeftHero from "./LeftHero"
 import RightHero from "./RightHero"
 
+import store from "../../store"
+
 const Home = () => {
     return (
         <div className="wrapper-body border border-light bg-white">
