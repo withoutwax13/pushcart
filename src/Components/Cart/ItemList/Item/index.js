@@ -61,12 +61,27 @@ function Item({id, updateCart, removeFromCart}) {
         updateCart(id, nData)
     } 
 
+    const LoadImage = ({src, classNameStr}) => {
+        // const [loaded, setLoaded] = useState(false);
+        let img_src = null
+        try{
+            img_src = require(`../../../../Assets/images/${src}`)
+        }catch{
+            img_src = 'https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-collection-4_large.png?format=jpg&quality=90&v=1530129177' 
+        }
+        return (
+          <img className={classNameStr} src={img_src} width='70px'/>
+        );
+    }
+
     return (
         <Container>
             <Stack spacing={2}>
                 <Grid container>
                     <Grid item md={2} justifyContent='flex-start' sx={{paddingTop: '5px', paddingBottom: '5px'}}>
-                        <Box>Image here</Box>
+                        <Box>
+                            <LoadImage src={image}/>
+                        </Box> 
                     </Grid>
                     <Grid item md={7} sx={{paddingTop: '5px', paddingBottom: '5px'}}>
                         {<Typography variant='h6'>{product_name}</Typography>}
