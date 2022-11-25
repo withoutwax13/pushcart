@@ -20,7 +20,7 @@ function ItemList({cart, updateCart}) {
                 backgroundColor: 'primary.containerNotWhite',
             }}
             style={{boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px'}}>
-            <Stack spacing={1}>
+            <Stack spacing={3}>
                 <Box
                     sx={{
                         width: '100%',
