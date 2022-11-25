@@ -6,7 +6,7 @@ import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import AddIcon from '@mui/icons-material/Add';
-import { Accordion, Typography, AccordionDetails, AccordionSummary, Slider, TextField } from '@mui/material';
+import { Accordion, Typography, AccordionDetails, AccordionSummary, Slider, TextField, Pagination } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import TuneIcon from '@mui/icons-material/Tune';
 
@@ -56,70 +56,8 @@ const categories = [
     "Outdoor & Garden",
 ]
 
-const products = [
-    {
-        id: 0,
-        img: null,
-        heading: "Polo & Shorts set",
-        productImage1: `prod_example_card_1.webp`,
-        productImage2: `prod_example_card_2.webp`,
-        price: 18.50,
-        stock: 40,
-        cartPush: 0
-    },
-    {
-        id: 1,
-        img: null,
-        heading: "Polo & Shorts set",
-        productImage1: `prod_example_card_1.webp`,
-        productImage2: `prod_example_card_2.webp`,
-        price: 48.00,
-        stock: 5,
-        cartPush: 0
-    },
-    {
-        id: 2,
-        img: null,
-        heading: "Polo & Shorts set",
-        productImage1: `prod_example_card_1.webp`,
-        productImage2: `prod_example_card_2.webp`,
-        price: 520.50,
-        stock: 9,
-        cartPush: 0
-    },
-    {
-        id: 3,
-        img: null,
-        heading: "Polo & Shorts set",
-        productImage1: `prod_example_card_1.webp`,
-        productImage2: `prod_example_card_2.webp`,
-        price: 38.50,
-        stock: 6,
-        cartPush: 0
-    },
-    {
-        id: 4,
-        img: null,
-        heading: "Polo & Shorts set",
-        productImage1: `prod_example_card_1.webp`,
-        productImage2: `prod_example_card_2.webp`,
-        price: 12.20,
-        stock: 3,
-        cartPush: 0
-    },
-    {
-        id: 5,
-        img: null,
-        heading: "Polo & Shorts set",
-        productImage1: `prod_example_card_1.webp`,
-        productImage2: `prod_example_card_2.webp`,
-        price: 148.50,
-        stock: 10,
-        cartPush: 0
-    }
-]
-
 export const Carousel = (props) => {
+
     const {children, show} = props
 
     const [currentIndex, setCurrentIndex] = React.useState(0)
@@ -206,9 +144,47 @@ export const Carousel = (props) => {
 
 function Products (props) {
 
+    const displayProducts = () => {
+        if(props.products.data !== undefined){
+            return props.products.data.filter((product, index)=>index < page * 20 && index >= (page - 1) * 20).map((product,index)=>{
+                return (
+                    <ProductCard tag={tagRandomizer()} key={index} data={product}/>
+                )
+            })
+        }else{
+            return (
+                <p className="placeholder-glow">
+                    <span className="placeholder col-12"></span>
+                    <span className="placeholder col-12"></span>
+                    <span className="placeholder col-12"></span>
+                    <span className="placeholder col-12"></span>
+                    <span className="placeholder col-12"></span>
+                    <span className="placeholder col-12"></span>
+                    <span className="placeholder col-12"></span>
+                    <span className="placeholder col-12"></span>
+                    <span className="placeholder col-12"></span>
+                    <span className="placeholder col-12"></span>
+                    <span className="placeholder col-12"></span>
+                    <span className="placeholder col-12"></span>
+                    <span className="placeholder col-12"></span>
+                    <span className="placeholder col-12"></span>
+                    <span className="placeholder col-12"></span>
+                    <span className="placeholder col-12"></span>
+                    <span className="placeholder col-12"></span>
+                    <span className="placeholder col-12"></span>
+                    <span className="placeholder col-12"></span>
+                    <span className="placeholder col-12"></span>
+                </p>
+                
+            )
+        }
+    }
+
     let deviceWidth = window.innerWidth
     || document.documentElement.clientWidth
     || document.body.clientWidth;
+
+    const [page, setPage] = React.useState(1)
 
     const tagRandomizer = () => Math.floor(Math.random() * 3)
 
@@ -438,17 +414,25 @@ function Products (props) {
                         
                 </nav>
                 
-                <div class="wrapper-body bg-white">
-                    <div id="Tops" class="tabcontent">
-                        <h2 class="tab-title text-center pt-4"><b>{categories[subnavHighlight].toUpperCase()}</b></h2>
+                <div className="wrapper-body bg-white">
+                    <div id="Tops" className="tabcontent">
+                        <h2 className="tab-title text-center pt-4"><b>{categories[subnavHighlight].toUpperCase()}</b></h2>
                     
-                        <div class="container ">
-                            <div class="row">
-                                {props.products.data.map((product,index)=>{
-                                    return (
-                                        <ProductCard tag={tagRandomizer()} key={index} data={product}/>
-                                    )
-                                })}
+                        <div className="container ">
+                            <div className="row">
+                            <Pagination 
+                                defaultPage={1} boundaryCount={2}
+                                count={props.products.data === undefined ? 10 : Number(Math.ceil(props.products.data.length / 20))} 
+                                size='large' 
+                                variant="outlined" 
+                                shape="rounded"
+                                color="secondary" 
+                                style={{backgroundColor: 'white'}}
+                                page={page} 
+                                onChange={(e,v)=>setPage(Number(v))}
+                            />
+                                {console.log(page)}
+                                {displayProducts()}
                             </div>
                         </div>
                     </div>

@@ -35,7 +35,7 @@ const LoadImage = ({src, classNameStr}) => {
         img_src = 'https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-collection-4_large.png?format=jpg&quality=90&v=1530129177' 
     }
     return (
-      <img class={classNameStr} src={img_src}/>
+      <img className={classNameStr} src={img_src}/>
     );
 }
 const ProductCard = (props) => {
