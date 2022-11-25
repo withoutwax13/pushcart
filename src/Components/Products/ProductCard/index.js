@@ -99,7 +99,7 @@ const ProductCard = (props) => {
                         <li onClick={handleIncrement} class="icon-product"><span><AddCircleIcon/></span></li>
                     </ul>
             </div>
-            <small class="tag bg-red">{tags[props.tag]}</small>
+            {/* <small class="tag bg-red">{tags[props.tag]}</small> */}
             <div class="title-product pt-4 pb-1">{product_name}</div>
             <div class="d-flex align-content-center justify-content-center star">
                 <span><img src={require("../../../Assets/images/icon-star.png")}/></span>
