@@ -64,7 +64,7 @@ export const resetFilter = () => {
 
 // products
 export const getProducts = (filter) => async dispatch => {
-    API.get(`products`) //with filter eme here if possible
+    API.get(`products`)
         .then((response)=>{
             dispatch({
                 type: "GET_PRODUCTS",

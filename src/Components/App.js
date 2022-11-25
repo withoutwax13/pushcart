@@ -5,7 +5,6 @@ import { getProducts, clearProducts } from '../Actions'
 import {
   Routes,
   Route,
-  Link,
 } from "react-router-dom"
 import {
   ThemeProvider, 
@@ -45,12 +44,12 @@ const theme = createTheme({
 
 function App({getProducts, clearProducts}) {
   React.useEffect(()=>{
+    clearProducts()
     getProducts()
     return ()=>{
       clearProducts()
     }
   }, [])
-  console.log("persist store", store.getState())
   return (
     <ThemeProvider theme={theme}>
       <Routes>

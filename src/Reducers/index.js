@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux'
 
 const cartReducer = (cartState = [], action) => {
-    
-    console.log(cartState)
     switch(action.type){
         case 'ADD_ITEM':
             if(action.payload.cartPush === 0){
