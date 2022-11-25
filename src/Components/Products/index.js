@@ -6,7 +6,11 @@ import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import AddIcon from '@mui/icons-material/Add';
-import { Accordion, Typography, AccordionDetails, AccordionSummary, Slider, TextField, Pagination } from '@mui/material';
+import { 
+    Accordion, Typography, AccordionDetails, 
+    AccordionSummary, TextField, Pagination, 
+    MenuItem, Select, InputLabel 
+} from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import TuneIcon from '@mui/icons-material/Tune';
 
@@ -29,6 +33,7 @@ import ProductCard from './ProductCard';
 
 import { Container, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { setFilter, resetFilter, getProductsByFilter } from '../../Actions';
 
 const categories = [
     "Women Tops",
@@ -111,7 +116,6 @@ export const Carousel = (props) => {
     return (
         <div className="carousel-container">
             <div className="carousel-wrapper">
-                {/* You can alwas change the content of the button to other things */}
                 {
                     currentIndex > 0 &&
                     <button onClick={prev} className="left-arrow">
@@ -130,7 +134,6 @@ export const Carousel = (props) => {
                         {children}
                     </div>
                 </div>
-                {/* You can alwas change the content of the button to other things */}
                 {
                     currentIndex < (length - show) &&
                     <button onClick={next} className="right-arrow">
@@ -143,7 +146,11 @@ export const Carousel = (props) => {
 }
 
 function Products (props) {
-
+    React.useEffect(()=>{
+        if(props.filter !== null){
+            props.getProductsByFilter(props.filter)
+        }
+    }, [props.filter])
     const displayProducts = () => {
         if(props.products.data !== undefined){
             return props.products.data.filter((product, index)=>index < page * 20 && index >= (page - 1) * 20).map((product,index)=>{
@@ -183,23 +190,34 @@ function Products (props) {
     let deviceWidth = window.innerWidth
     || document.documentElement.clientWidth
     || document.body.clientWidth;
-
+    const tagRandomizer = () => Math.floor(Math.random() * 3)
     const [page, setPage] = React.useState(1)
 
-    const tagRandomizer = () => Math.floor(Math.random() * 3)
+    
 
-    // for slider components of price and stock, respectively
-    const [value, setValue] = React.useState([20, 37]);
-    const [valueStock, setValueStock] = React.useState([20, 37]);
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
-    const handleChangeStock = (event, newValue) => {
-        setValueStock(newValue);
-    };
-
-    function valuetext(value) {
-        return `php ${value}`;
+    // for filter components of price and stock, respectively
+    const [priceLabel, setPriceLabel] = React.useState("")
+    const priceSelections = {
+        "Less than PHP 399.99": [1, 399.99],
+        "PHP 400.00 - PHP 999.99": [400, 999.99],
+        "PHP 1000.00 - PHP 3999.99": [1000, 3999.99],
+        "PHP 4000.00 - PHP 9999.99": [4000, 9999.99],
+        "PHP 10000.00 and above": [10000, null]
+    }
+    
+    const handlePriceLabelChange = (e) => {
+        setPriceLabel(e.target.value)
+    }
+    const [stockLabel, setStockLabel] = React.useState("")
+    const stockSelections = {
+        "Less than 100": [1, 499],
+        "100 - 500": [100, 500],
+        "501 - 1500": [501, 1500],
+        "1501 - 4000": [1501, 4000],
+        "Above 4000": [4000, null]
+    }
+    const handleStockLabelChange = (e) => {
+        setStockLabel(e.target.value)
     }
 
     const [dir, setDir] = React.useState({
@@ -235,6 +253,7 @@ function Products (props) {
             setUserInputForChip('')
         }
     }
+    
 
     // navigation list of the drawer
     const list = (anchor) => (
@@ -281,12 +300,22 @@ function Products (props) {
                         </AccordionSummary>
                         <AccordionDetails>
                         <Box sx={{ width: 200 }}>
-                            <Slider
-                                value={value}
-                                onChange={handleChange}
-                                valueLabelDisplay="auto"
-                                getAriaValueText={valuetext}
-                            />
+                            <FormControl sx={{ m: 1, minWidth: 120, maxWidth: 170 }}>
+                                <InputLabel id="demo-simple-select-helper-label">Price Range</InputLabel>
+                                <Select
+                                labelId="demo-simple-select-helper-label"
+                                id="demo-simple-select-helper"
+                                value={priceLabel}
+                                label="price range"
+                                onChange={handlePriceLabelChange}
+                                >
+                                <MenuItem value="Less than PHP 399.99">Less than PHP 399.99</MenuItem>
+                                <MenuItem value="PHP 400.00 - PHP 999.99">PHP 400.00 - PHP 999.99</MenuItem>
+                                <MenuItem value="PHP 1000.00 - PHP 3999.99">PHP 1000.00 - PHP 3999.99</MenuItem>
+                                <MenuItem value="PHP 4000.00 - PHP 9999.99">PHP 4000.00 - PHP 9999.99</MenuItem>
+                                <MenuItem value="PHP 10000.00 and above">PHP 10000.00 and above</MenuItem>
+                                </Select>
+                            </FormControl>
                         </Box>
                         </AccordionDetails>
                     </Accordion>
@@ -303,12 +332,22 @@ function Products (props) {
                         </AccordionSummary>
                         <AccordionDetails>
                             <Box sx={{ width: 200 }}>
-                                <Slider
-                                    value={valueStock}
-                                    onChange={handleChangeStock}
-                                    valueLabelDisplay="auto"
-                                    getAriaValueText={valuetext}
-                                />
+                            <FormControl sx={{ m: 1, minWidth: 120, maxWidth: 170 }}>
+                                <InputLabel id="demo-simple-select-helper-label">Stock Range</InputLabel>
+                                <Select
+                                labelId="demo-simple-select-helper-label"
+                                id="demo-simple-select-helper"
+                                value={stockLabel}
+                                label="stock range"
+                                onChange={handleStockLabelChange}
+                                >
+                                <MenuItem value="Less than 100">Less than 100</MenuItem>
+                                <MenuItem value="100 - 500">100 - 500</MenuItem>
+                                <MenuItem value="501 - 1500">501 - 1500</MenuItem>
+                                <MenuItem value="1501 - 4000">1501 - 4000</MenuItem>
+                                <MenuItem value="Above 4000">Above 4000</MenuItem>
+                                </Select>
+                            </FormControl>
                             </Box>
                         </AccordionDetails>
                     </Accordion>
@@ -380,17 +419,22 @@ function Products (props) {
         // api call here to fetch data based on filter
         setSubnavHighlight(radioCategSelect)
         categories[radioCategSelect].split(' ').forEach(((word, i)=>setChipData(chips=>chips.concat({key: chips.length + i, label: word }))))
-        
+        props.setFilter({
+            price: {min: priceSelections[priceLabel][0], max: priceSelections[priceLabel][1]}, 
+            category: 0, 
+            stock: {min: stockSelections[stockLabel][0], max: stockSelections[stockLabel][1]}, 
+            tags: chipData
+        })
     }
     const handleResetFilter = () => {
         // will reset all filters, returning the default params data
         setChipData([])
         setRadioCategSelect(0)
         setSubnavHighlight(0)
+        props.resetFilter()
         // etc
     }
     
-    console.log(props.products)
     
     return (
         <div>
@@ -431,7 +475,6 @@ function Products (props) {
                                 page={page} 
                                 onChange={(e,v)=>setPage(Number(v))}
                             />
-                                {console.log(page)}
                                 {displayProducts()}
                             </div>
                         </div>
@@ -453,8 +496,9 @@ function Products (props) {
 
 const mapStateToProps = (state) => {
     return {
-        products: state.products
+        products: state.products,
+        filter: state.filter
     }
 }
 
-export default connect(mapStateToProps)(Products)
+export default connect(mapStateToProps, {setFilter, resetFilter, getProductsByFilter})(Products)

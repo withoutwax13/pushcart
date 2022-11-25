@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {connect} from 'react-redux'
-import { getProducts, clearProducts } from '../Actions'
+import { getProducts, clearProducts, resetFilter } from '../Actions'
 
 import {
   Routes,
@@ -42,14 +42,16 @@ const theme = createTheme({
   }
 });
 
-function App({getProducts, clearProducts}) {
+function App({getProducts, clearProducts, resetFilter}) {
   React.useEffect(()=>{
-    clearProducts()
     getProducts()
+    resetFilter()
     return ()=>{
       clearProducts()
+      resetFilter()
     }
   }, [])
+  console.log("persist store", store.getState())
   return (
     <ThemeProvider theme={theme}>
       <Routes>
@@ -91,4 +93,4 @@ function App({getProducts, clearProducts}) {
   );
 }
 
-export default connect(null, {getProducts, clearProducts})(App);
+export default connect(null, {getProducts, clearProducts, resetFilter})(App);

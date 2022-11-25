@@ -1,4 +1,5 @@
 import API from "../API"
+import store from "../store"
 
 // cart
 export const addToCart = (product) => {
@@ -63,12 +64,24 @@ export const resetFilter = () => {
 
 
 // products
-export const getProducts = (filter) => async dispatch => {
+export const getProducts = () => async dispatch => {
     API.get(`products`)
         .then((response)=>{
             dispatch({
                 type: "GET_PRODUCTS",
                 payload: response.data
+            })
+        })
+}
+
+export const getProductsByFilter = (sfilter)=> async dispatch => {
+    API.get(`products`)
+        .then((response)=>{
+            let newProds = response.data
+            newProds.data = newProds.data.filter((prod)=>prod.price <= sfilter.price.max && prod.price >= sfilter.price.min).filter((prod)=>prod.stock <= sfilter.stock.max && prod.stock >= sfilter.stock.min)
+            dispatch({
+                type: "GET_PRODUCTS_BY_FILTER",
+                payload: newProds
             })
         })
 }
