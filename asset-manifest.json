@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/pushcart/static/css/main.2bc8157a.css",
-    "main.js": "/pushcart/static/js/main.19832627.js",
+    "main.js": "/pushcart/static/js/main.c0b930c2.js",
     "static/js/787.cb2f4b6d.chunk.js": "/pushcart/static/js/787.cb2f4b6d.chunk.js",
     "static/media/carousel1.gif": "/pushcart/static/media/carousel1.2ddb7e603e1a21120b5a.gif",
     "static/media/carousel2.gif": "/pushcart/static/media/carousel2.0f27f0d70c61150e0324.gif",
@@ -348,11 +348,11 @@
     "static/media/pushcart.svg": "/pushcart/static/media/pushcart.9e8fb2db26af8ab7ad45.svg",
     "index.html": "/pushcart/index.html",
     "main.2bc8157a.css.map": "/pushcart/static/css/main.2bc8157a.css.map",
-    "main.19832627.js.map": "/pushcart/static/js/main.19832627.js.map",
+    "main.c0b930c2.js.map": "/pushcart/static/js/main.c0b930c2.js.map",
     "787.cb2f4b6d.chunk.js.map": "/pushcart/static/js/787.cb2f4b6d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2bc8157a.css",
-    "static/js/main.19832627.js"
+    "static/js/main.c0b930c2.js"
   ]
 }
