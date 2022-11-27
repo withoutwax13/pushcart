@@ -41,21 +41,39 @@ const userReducer = (userState = null, action) => {
 }
 
 
-const filterReducer = (filterState = null, action) => {
+const filterReducer = (filterState = {
+                price: {
+                    min: 1, max: null
+                }, 
+                category: 3001,
+                stock: {
+                    min: 1, max: null
+                }, 
+                tags: []
+            }, action) => {
     switch(action.type){
         case "SET_FILTER":
             return {
                 price: {
-                    min: action.payload.price.min, max: action.payload.price.max === null ? 999999999 : action.payload.price.max
+                    min: action.payload.price.min, max: action.payload.price.max
                 }, 
                 category: action.payload.category, 
                 stock: {
-                    min: action.payload.stock.min, max: action.payload.stock.max === null ? 999999999 : action.payload.stock.max
+                    min: action.payload.stock.min, max: action.payload.stock.max
                 }, 
                 tags: action.payload.tags
             }
         case "RESET_FILTER":
-            return null
+            return {
+                price: {
+                    min: 1, max: null
+                }, 
+                category: 3001,
+                stock: {
+                    min: 1, max: null
+                }, 
+                tags: []
+            }
         default:
             return filterState
     }
@@ -63,7 +81,7 @@ const filterReducer = (filterState = null, action) => {
 
 const productsReducer = (productsState = [], action) => {
     switch(action.type){
-        case "GET_PRODUCTS" || "RESET_FILTER":
+        case "GET_PRODUCTS":
             return action.payload
         case "GET_PRODUCTS_BY_FILTER":
             let sfilter = action.payload

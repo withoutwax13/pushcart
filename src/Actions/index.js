@@ -78,7 +78,30 @@ export const getProductsByFilter = (sfilter)=> async dispatch => {
     API.get(`products`)
         .then((response)=>{
             let newProds = response.data
-            newProds.data = newProds.data.filter((prod)=>prod.price <= sfilter.price.max && prod.price >= sfilter.price.min).filter((prod)=>prod.stock <= sfilter.stock.max && prod.stock >= sfilter.stock.min)
+            newProds.data = newProds.data.filter((prod)=>{
+                                            if(sfilter.price.max !== null){
+                                                return prod.price <= sfilter.price.max && prod.price >= sfilter.price.min
+                                            }else{
+                                                return prod.price >= sfilter.price.min
+                                            }
+                                        })
+                                        .filter((prod)=>{
+                                            if(sfilter.stock.max !== null){
+                                                return prod.stock <= sfilter.stock.max && prod.stock >= sfilter.stock.min
+                                            }else{
+                                                return prod.stock >= sfilter.stock.min
+                                            }
+                                        })
+                                        .filter((prod)=>{
+                                            if(sfilter.tags.length !== 0){
+                                                let result = false
+                                                prod.product_name.toLowerCase().split("-").join(" ").split(" ").forEach(word=>{if(sfilter.tags.includes(word)){result = true}})
+                                                if(result === true){return prod}
+                                            }else{
+                                                return prod
+                                            }
+                                        })
+                                        .filter((prod)=>prod.category_id == sfilter.category)
             dispatch({
                 type: "GET_PRODUCTS_BY_FILTER",
                 payload: newProds

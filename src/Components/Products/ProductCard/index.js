@@ -43,8 +43,8 @@ const ProductCard = (props) => {
     const {product_id, image, price, product_name, stock} = props.data
     const [countValue, setCountValue] = useState(0)
     const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    // const handleOpen = () => setOpen(true);
+    // const handleClose = () => setOpen(false);
     const handleIncrement = () => {
         setCountValue(prevState=> prevState < stock ? prevState + 1 : stock)
     } 

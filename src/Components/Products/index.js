@@ -33,33 +33,9 @@ import ProductCard from './ProductCard';
 
 import { Container, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { setFilter, resetFilter, getProductsByFilter } from '../../Actions';
+import { setFilter, resetFilter, getProductsByFilter, getProducts } from '../../Actions';
 
-const categories = [
-    "Women Tops",
-    "Women Bottoms",
-    "Women Dresses",
-    "Women Bags",
-    "Women Shoes",
-    "Women Accessories",
-    "Men Tops",
-    "Men Bottoms",
-    "Men Formal Wear",
-    "Men Bags",
-    "Men Shoes",
-    "Men Accessories",
-    "Kid Tops",
-    "Kids Bottoms",
-    "Kid Bags",
-    "Kid Shoes",
-    "Kid Baby Products",
-    "Kid Toys",
-    "Home & Living",
-    "Electronics",
-    "Furniture",
-    "Kitchenware",
-    "Outdoor & Garden",
-]
+import categories from '../../API/categories';
 
 export const Carousel = (props) => {
 
@@ -281,7 +257,7 @@ function Products (props) {
                                         name="radio-buttons-group"
                                         onChange={e=>setRadioCategSelect(e.target.value)}
                                     >
-                                        {categories.map((category, index)=><FormControlLabel key={index} value={index} control={<Radio />} label={category} />)}
+                                        {categories.map((category, index)=><FormControlLabel key={index} value={category.id} control={<Radio />} label={`${category.categGroup} ${category.categLabel}`} />)}
                                     </RadioGroup>
                                 </FormControl>
                             </Box>
@@ -413,24 +389,25 @@ function Products (props) {
     let [subnavHighlight, setSubnavHighlight] = React.useState(0)
 
     //for referencing the category filter selection
-    let [radioCategSelect, setRadioCategSelect] = React.useState(0)
+    let [radioCategSelect, setRadioCategSelect] = React.useState(3001)
 
     const handleApplyFilter = () => {
         // api call here to fetch data based on filter
         setSubnavHighlight(radioCategSelect)
-        categories[radioCategSelect].split(' ').forEach(((word, i)=>setChipData(chips=>chips.concat({key: chips.length + i, label: word }))))
+        // categories[radioCategSelect].split(' ').forEach(((word, i)=>setChipData(chips=>chips.concat({key: chips.length + i, label: word }))))
         props.setFilter({
             price: {min: priceSelections[priceLabel][0], max: priceSelections[priceLabel][1]}, 
-            category: 0, 
+            category: radioCategSelect, 
             stock: {min: stockSelections[stockLabel][0], max: stockSelections[stockLabel][1]}, 
-            tags: chipData
+            tags: chipData.map(c=>c.label.toLowerCase())
         })
     }
     const handleResetFilter = () => {
         // will reset all filters, returning the default params data
         setChipData([])
-        setRadioCategSelect(0)
-        setSubnavHighlight(0)
+        setRadioCategSelect(3001)
+        // setSubnavHighlight(0)
+        props.getProducts()
         props.resetFilter()
         // etc
     }
@@ -445,13 +422,15 @@ function Products (props) {
                                 <Row>
                                     <Col className="navbar-brand mb-0 h1"><button className="openbtn" onClick={toggleDrawer('left', true)}><TuneIcon/>FILTER</button></Col>
                                     
-                                    <Carousel show={deviceWidth <= 700 ? 3 : 8}>
+                                    {/* <Carousel show={deviceWidth <= 700 ? 3 : 8}>
                                         {categories.map((category, index)=>{
                                             return <Col><button className="tablink" onClick={()=>{
                                                 setSubnavHighlight(index); setChipData([]); categories[index].split(' ').forEach(((word, i)=>{setChipData(chips=>chips.concat({key: chips.length + i, label: word }))}));
-                                            }} key={index} id="defaultOpen"><Typography>{category.toUpperCase()}</Typography></button></Col>
+                                            }} key={index} id="defaultOpen">
+                                                <Typography>{category.toUpperCase()}</Typography>
+                                                </button></Col>
                                         })}
-                                    </Carousel>
+                                    </Carousel> */}
                                 </Row>
                             </Container>            
                         </div>
@@ -460,7 +439,9 @@ function Products (props) {
                 
                 <div className="wrapper-body bg-white">
                     <div id="Tops" className="tabcontent">
-                        <h2 className="tab-title text-center pt-4"><b>{categories[subnavHighlight].toUpperCase()}</b></h2>
+                        <h2 className="tab-title text-center pt-4"><b>
+                        {/* {`${categories.filter(c=>c.id === radioCategSelect)[0].categGroup} ${categories.filter(c=>c.id === radioCategSelect)[0].categLabel}`} */}
+                            </b></h2>
                     
                         <div className="container ">
                             <div className="row">
@@ -501,4 +482,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {setFilter, resetFilter, getProductsByFilter})(Products)
+export default connect(mapStateToProps, {setFilter, resetFilter, getProductsByFilter, getProducts})(Products)
