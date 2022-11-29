@@ -38,7 +38,9 @@ const Header = ({user, cart, logoutCurrentUser, setCategoryFilter}) => {
     return (
         <nav className="navbar navbar-expand-lg sticky-top">
             <div className="container-fluid">
-                <Link className="navbar-brand" to={`/pushcart`}><h4>PushCart</h4></Link>
+                <Link className="navbar-brand" to={`/pushcart`}>
+                    <img src={require("../../Assets/logo/logo.png")} style={{width: '110px', height: '50px'}}/>
+                </Link>
                 <button 
                     className="navbar-toggler" type="button" 
                     data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
@@ -51,7 +53,7 @@ const Header = ({user, cart, logoutCurrentUser, setCategoryFilter}) => {
                 </ul>
                 <div className="d-flex nav-item navbar-nav mb-2 mb-lg-0">
                     <a className="nav-categories nav-link" id="basic-button" data-bs-toggle="dropdown">
-                             <CategoryOutlinedIcon/> <span className='px-1'>SHOP</span>
+                             <CategoryOutlinedIcon/> <span className='px-3'>SHOP</span>
                          </a>
                          <div className="dropdown-menu megamenu" role="menu">
                              <div className="row g-3">
@@ -134,7 +136,7 @@ const Header = ({user, cart, logoutCurrentUser, setCategoryFilter}) => {
                             <Container className='text-center' onClick={()=>setCategoryFilter(null)}><Link to={`/pushcart/products`}><Typography variant='h6'>See all</Typography><KeyboardDoubleArrowDownIcon/></Link></Container>
                          </div>
                     <Link to={`/pushcart/orders`}  className='nav-categories nav-link px-1'>
-                        <ViewStreamOutlinedIcon/> <span className='px-1'>ORDERS</span>
+                        <ViewStreamOutlinedIcon/> <span className='px-3'>ORDERS</span>
                     </Link>
                     <a className='nav-categories nav-link px-1'
                         id="basic-button"
@@ -142,7 +144,7 @@ const Header = ({user, cart, logoutCurrentUser, setCategoryFilter}) => {
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
                         onClick={handleClick}>
-                       <AccountCircleOutlinedIcon /><span className='px-1'>ACCOUNT</span>
+                       <AccountCircleOutlinedIcon /><span className='px-3'>ACCOUNT</span>
                     </a>
                     <Menu
                         id="basic-menu"

@@ -56,8 +56,8 @@ function Footer() {
                     </ul>
                 </div>
                 <div class="col-md-4 mb-4 mb-md-0">
-                    <h1>PushCart.Com</h1>
-                    <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque dolor ducimus doloremque earum ullam. Architecto voluptatum odio magni.</p>
+                    <img src={require("../../Assets/logo/logo.png")} style={{width: '300px', height: '150px'}}/>
+                    <p class="mb-4">Add to cart, checkout, confirm. Shop without hassle. Save your time.</p>
                     {/* <form action="#" class="subscribe">
                         <input type="text" class="form-control" placeholder="Enter your e-mail">
                         <input type="submit" class="btn btn-submit" value="Send">
