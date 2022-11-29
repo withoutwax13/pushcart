@@ -122,10 +122,12 @@ export const Carousel = (props) => {
 }
 
 function Products (props) {
+    const [categoryLabel, setCategoryLabel] = React.useState("All Our Products")
     React.useEffect(()=>{
         if(props.filter !== null){
             props.getProductsByFilter(props.filter)
         }
+        setCategoryLabel(`${categories.find(c=>c.id === props.filter.category).categGroup} ${categories.find(c=>c.id === props.filter.category).categLabel}`)
     }, [props.filter])
     const displayProducts = () => {
         if(props.products.data !== undefined){
@@ -386,14 +388,14 @@ function Products (props) {
     );
     
     // for referencing subnav selection
-    let [subnavHighlight, setSubnavHighlight] = React.useState(0)
+    // let [subnavHighlight, setSubnavHighlight] = React.useState(0)
 
     //for referencing the category filter selection
-    let [radioCategSelect, setRadioCategSelect] = React.useState(3001)
+    let [radioCategSelect, setRadioCategSelect] = React.useState(props.filter.category)
 
     const handleApplyFilter = () => {
         // api call here to fetch data based on filter
-        setSubnavHighlight(radioCategSelect)
+        // setSubnavHighlight(radioCategSelect)
         // categories[radioCategSelect].split(' ').forEach(((word, i)=>setChipData(chips=>chips.concat({key: chips.length + i, label: word }))))
         props.setFilter({
             price: {min: priceSelections[priceLabel][0], max: priceSelections[priceLabel][1]}, 
@@ -440,7 +442,7 @@ function Products (props) {
                 <div className="wrapper-body bg-white">
                     <div id="Tops" className="tabcontent">
                         <h2 className="tab-title text-center pt-4"><b>
-                        {/* {`${categories.filter(c=>c.id === radioCategSelect)[0].categGroup} ${categories.filter(c=>c.id === radioCategSelect)[0].categLabel}`} */}
+                            {categoryLabel}
                             </b></h2>
                     
                         <div className="container ">

@@ -68,12 +68,15 @@ const filterReducer = (filterState = {
                 price: {
                     min: 1, max: null
                 }, 
-                category: 3001,
+                category: null,
                 stock: {
                     min: 1, max: null
                 }, 
                 tags: []
             }
+        case "SET_CATEGORY_FILTER":
+            let newFilter = {...filterState, category: action.payload}
+            return newFilter
         default:
             return filterState
     }
@@ -84,7 +87,6 @@ const productsReducer = (productsState = [], action) => {
         case "GET_PRODUCTS":
             return action.payload
         case "GET_PRODUCTS_BY_FILTER":
-            let sfilter = action.payload
             return action.payload
         case "CLEAR_PRODUCTS":
             return []

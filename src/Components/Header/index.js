@@ -15,13 +15,13 @@ import MenuItem from '@mui/material/MenuItem';
 
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import { logoutCurrentUser, changeProductCategory } from '../../Actions';
+import { logoutCurrentUser, setCategoryFilter } from '../../Actions';
 
 import categories from '../../API/categories';
 
 
 
-const Header = ({user, cart, logoutCurrentUser, changeProductCategory}) => {
+const Header = ({user, cart, logoutCurrentUser, setCategoryFilter}) => {
     
     const [cartItems, setcartItems] = useState(0)
     useEffect(()=>setcartItems(cart.reduce((a,b)=>a+(b.cartPush), 0), [cart]))
@@ -63,7 +63,7 @@ const Header = ({user, cart, logoutCurrentUser, changeProductCategory}) => {
                                      <ul className="list-unstyled">
                                         {categories.filter(category=>category.categGroup === "Women").map((category, i)=>{
                                             return (
-                                                <li onClick={()=>changeProductCategory(category.id)} key={i}>
+                                                <li onClick={()=>setCategoryFilter(category.id)} key={i}>
                                                     <img src={require(`../../Assets/images/${category.imgFile}`)}
                                                      width="50"/>
                                                     <Link to={`/pushcart/products`} state={{category}}><label className="form-check-label" for="flexCheckDefault">{category.categLabel}</label></Link>
@@ -81,7 +81,7 @@ const Header = ({user, cart, logoutCurrentUser, changeProductCategory}) => {
                                      <ul className="list-unstyled">
                                         {categories.filter(category=>category.categGroup === "Men").map((category, i)=>{
                                             return (
-                                                <li onClick={()=>changeProductCategory(category.id)} key={i}>
+                                                <li onClick={()=>setCategoryFilter(category.id)} key={i}>
                                                     <img src={require(`../../Assets/images/${category.imgFile}`)}
                                                      width="50"/>
                                                     <Link to={`/pushcart/products`} state={{category}}><label className="form-check-label" for="flexCheckDefault">{category.categLabel}</label></Link>
@@ -99,7 +99,7 @@ const Header = ({user, cart, logoutCurrentUser, changeProductCategory}) => {
                                      <ul className="list-unstyled">
                                         {categories.filter(category=>category.categGroup === "Kid").map((category, i)=>{
                                             return (
-                                                <li onClick={()=>changeProductCategory(category.id)} key={i}>
+                                                <li onClick={()=>setCategoryFilter(category.id)} key={i}>
                                                     <img src={require(`../../Assets/images/${category.imgFile}`)}
                                                      width="50"/>
                                                     <Link to={`/pushcart/products`} state={{category}}><label className="form-check-label" for="flexCheckDefault">{category.categLabel}</label></Link>
@@ -117,7 +117,7 @@ const Header = ({user, cart, logoutCurrentUser, changeProductCategory}) => {
                                      <ul className="list-unstyled">
                                         {categories.filter(category=>category.categGroup === "Home").map((category, i)=>{
                                             return (
-                                                <li onClick={()=>changeProductCategory(category.id)} key={i}>
+                                                <li onClick={()=>setCategoryFilter(category.id)} key={i}>
                                                     <img src={require(`../../Assets/images/${category.imgFile}`)}
                                                      width="50"/>
                                                     <Link to={`/pushcart/products`} state={{category}}><label className="form-check-label" for="flexCheckDefault">{category.categLabel}</label></Link>
@@ -131,7 +131,7 @@ const Header = ({user, cart, logoutCurrentUser, changeProductCategory}) => {
                             
                             
                              </div>
-                            <Container className='text-center'><Link to={`/pushcart/products`}><Typography variant='h6'>See all</Typography><KeyboardDoubleArrowDownIcon/></Link></Container>
+                            <Container className='text-center' onClick={()=>setCategoryFilter(null)}><Link to={`/pushcart/products`}><Typography variant='h6'>See all</Typography><KeyboardDoubleArrowDownIcon/></Link></Container>
                          </div>
                     <Link to={`/pushcart/orders`}  className='nav-categories nav-link px-1'>
                         <ViewStreamOutlinedIcon/> <span className='px-1'>ORDERS</span>
@@ -177,4 +177,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {logoutCurrentUser, changeProductCategory})(Header)
+export default connect(mapStateToProps, {logoutCurrentUser, setCategoryFilter})(Header)

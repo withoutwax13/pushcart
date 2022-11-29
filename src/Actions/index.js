@@ -62,6 +62,13 @@ export const resetFilter = () => {
     }
 }
 
+export const setCategoryFilter = (categoryID) => {
+    return {
+        type: "SET_CATEGORY_FILTER",
+        payload: categoryID
+    }
+}
+
 
 // products
 export const getProducts = () => async dispatch => {
@@ -74,7 +81,16 @@ export const getProducts = () => async dispatch => {
         })
 }
 
-export const getProductsByFilter = (sfilter)=> async dispatch => {
+export const getProductsByFilter = (sfilter = {
+    price: {
+        min: 1, max: null
+    }, 
+    category: null,
+    stock: {
+        min: 1, max: null
+    }, 
+    tags: []
+})=> async dispatch => {
     API.get(`products`)
         .then((response)=>{
             let newProds = response.data
@@ -101,7 +117,12 @@ export const getProductsByFilter = (sfilter)=> async dispatch => {
                                                 return prod
                                             }
                                         })
-                                        .filter((prod)=>prod.category_id == sfilter.category)
+                                        .filter((prod)=>{
+                                            if(sfilter.category !== null){
+                                                return prod.category_id == sfilter.category
+                                            }
+                                            return prod
+                                        })
             dispatch({
                 type: "GET_PRODUCTS_BY_FILTER",
                 payload: newProds

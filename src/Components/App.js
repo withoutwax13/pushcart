@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {connect} from 'react-redux'
-import { getProducts, clearProducts, resetFilter } from '../Actions'
+import { getProductsByFilter, clearProducts, resetFilter } from '../Actions'
 
 import {
   Routes,
@@ -42,10 +42,10 @@ const theme = createTheme({
   }
 });
 
-function App({getProducts, clearProducts, resetFilter}) {
+function App({getProductsByFilter, clearProducts, resetFilter}) {
   React.useEffect(()=>{
-    getProducts()
     resetFilter()
+    getProductsByFilter()
     return ()=>{
       clearProducts()
       resetFilter()
@@ -93,4 +93,4 @@ function App({getProducts, clearProducts, resetFilter}) {
   );
 }
 
-export default connect(null, {getProducts, clearProducts, resetFilter})(App);
+export default connect(null, {getProductsByFilter, clearProducts, resetFilter})(App);
