@@ -9,7 +9,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { 
     Accordion, Typography, AccordionDetails, 
     AccordionSummary, TextField, Pagination, 
-    MenuItem, Select, InputLabel 
+    MenuItem, Select, InputLabel, Skeleton, Breadcrumbs 
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import TuneIcon from '@mui/icons-material/Tune';
@@ -20,6 +20,9 @@ import FormatPaintOutlinedIcon from '@mui/icons-material/FormatPaintOutlined';
 
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import LocalAtmTwoToneIcon from '@mui/icons-material/LocalAtmTwoTone';
+import Inventory2TwoToneIcon from '@mui/icons-material/Inventory2TwoTone';
+import SellTwoToneIcon from '@mui/icons-material/SellTwoTone';
 
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -136,29 +139,15 @@ function Products (props) {
             })
         }else{
             return (
-                <p className="placeholder-glow">
-                    <span className="placeholder col-12"></span>
-                    <span className="placeholder col-12"></span>
-                    <span className="placeholder col-12"></span>
-                    <span className="placeholder col-12"></span>
-                    <span className="placeholder col-12"></span>
-                    <span className="placeholder col-12"></span>
-                    <span className="placeholder col-12"></span>
-                    <span className="placeholder col-12"></span>
-                    <span className="placeholder col-12"></span>
-                    <span className="placeholder col-12"></span>
-                    <span className="placeholder col-12"></span>
-                    <span className="placeholder col-12"></span>
-                    <span className="placeholder col-12"></span>
-                    <span className="placeholder col-12"></span>
-                    <span className="placeholder col-12"></span>
-                    <span className="placeholder col-12"></span>
-                    <span className="placeholder col-12"></span>
-                    <span className="placeholder col-12"></span>
-                    <span className="placeholder col-12"></span>
-                    <span className="placeholder col-12"></span>
-                </p>
-                
+                [ ...Array(6).keys() ].map((_, i)=>{
+                    return (
+                        <div key={i} style={{padding: '20px'}}>
+                            <Skeleton variant="circular" width={40} height={40} />
+                            <Skeleton variant="rectangular" width={210} height={60} />
+                            <Skeleton variant="rounded" width={210} height={60} />
+                        </div>
+                    )
+                })
             )
         }
     }
@@ -420,7 +409,20 @@ function Products (props) {
                         <div className="container-fluid mx-auto">
                             <Container className="filter" id="main">
                                 <Row>
-                                    <Col className="navbar-brand mb-0 h1"><button className="openbtn" onClick={toggleDrawer('left', true)}><TuneIcon/>FILTER</button></Col>
+                                    <Col className="navbar-brand mb-0 h1">
+                                        <button className="openbtn" onClick={toggleDrawer('left', true)}><TuneIcon/>FILTER</button>
+                                    </Col>
+                                    <Col>
+                                        <Breadcrumbs aria-label="breadcrumb" style={{backgroundColor: "inherit"}}>
+                                            <LocalAtmTwoToneIcon sx={{ mr: 0.5 }}></LocalAtmTwoToneIcon><Typography>Price: {`${props.filter.price.max !== null ? `PHP ${(Math.round(props.filter.price.min*100)/100).toFixed(2)} to  PHP ${(Math.round(props.filter.price.max*100)/100).toFixed(2)}` : `Above PHP ${(Math.round(props.filter.price.min*100)/100).toFixed(2)}`}`}</Typography>
+                                        </Breadcrumbs>
+                                        <Breadcrumbs aria-label="breadcrumb" style={{backgroundColor: "inherit"}}>
+                                            <Inventory2TwoToneIcon sx={{ mr: 0.5 }}></Inventory2TwoToneIcon><Typography>Stock: {`${props.filter.stock.max !== null ? `${props.filter.stock.min} - ${props.filter.stock.max}` : `Above ${props.filter.stock.min}`}`}</Typography>
+                                        </Breadcrumbs>
+                                        <Breadcrumbs aria-label="breadcrumb" style={{backgroundColor: "inherit"}}>
+                                            <SellTwoToneIcon sx={{ mr: 0.5 }}></SellTwoToneIcon><Typography>Tags: {props.filter.tags.length === 0 ? `No tags selected.` : `${props.filter.tags.map((v,i)=>` ${v}`)}`}</Typography>
+                                        </Breadcrumbs>
+                                    </Col>
                                     
                                     {/* <Carousel show={deviceWidth <= 700 ? 3 : 8}>
                                         {categories.map((category, index)=>{
