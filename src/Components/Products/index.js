@@ -124,11 +124,9 @@ export const Carousel = (props) => {
 function Products (props) {
     const [categoryLabel, setCategoryLabel] = React.useState("All Our Products")
     React.useEffect(()=>{
-        if(props.filter !== null){
-            props.getProductsByFilter(props.filter)
-        }
-        setCategoryLabel(`${categories.find(c=>c.id === props.filter.category).categGroup} ${categories.find(c=>c.id === props.filter.category).categLabel}`)
-    }, [props.filter])
+        props.getProductsByFilter(props.filter)
+        setCategoryLabel(props.filter.category === null ? `All Our Products` : `${categories.find(c=>c.id == props.filter.category).categGroup} ${categories.find(c=>c.id == props.filter.category).categLabel}`)
+    }, [props.filter.category, props.filter.price, props.filter.stock, props.filter.tags])
     const displayProducts = () => {
         if(props.products.data !== undefined){
             return props.products.data.filter((product, index)=>index < page * 20 && index >= (page - 1) * 20).map((product,index)=>{

@@ -45,7 +45,7 @@ const filterReducer = (filterState = {
                 price: {
                     min: 1, max: null
                 }, 
-                category: 3001,
+                category: null,
                 stock: {
                     min: 1, max: null
                 }, 

@@ -50,7 +50,7 @@ function App({getProductsByFilter, clearProducts, resetFilter}) {
       clearProducts()
       resetFilter()
     }
-  }, [])
+  }, [store.getState().filter])
   console.log("persist store", store.getState())
   return (
     <ThemeProvider theme={theme}>
