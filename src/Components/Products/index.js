@@ -454,11 +454,22 @@ function Products (props) {
                                 variant="outlined" 
                                 shape="rounded"
                                 color="secondary" 
-                                style={{backgroundColor: 'white'}}
+                                style={{backgroundColor: 'white', margin: '20px auto'}}
                                 page={page} 
                                 onChange={(e,v)=>setPage(Number(v))}
                             />
                                 {displayProducts()}
+                            <Pagination 
+                                defaultPage={1} boundaryCount={2}
+                                count={props.products.data === undefined ? 10 : Number(Math.ceil(props.products.data.length / 20))} 
+                                size='large' 
+                                variant="outlined" 
+                                shape="rounded"
+                                color="secondary" 
+                                style={{backgroundColor: 'white', margin: '20px auto'}}
+                                page={page} 
+                                onChange={(e,v)=>setPage(Number(v))}
+                            />
                             </div>
                         </div>
                     </div>
