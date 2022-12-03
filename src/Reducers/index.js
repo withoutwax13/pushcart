@@ -98,6 +98,8 @@ const ordersReducer = (ordersState = [], action) => {
     switch(action.type){
         case "GET_ORDERS":
             return action.payload
+        case "CLEAR_ORDERS":
+            return []
         default:
             return ordersState
     }

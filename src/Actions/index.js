@@ -157,11 +157,16 @@ export const login = (creds) => async dispatch => {
 export const getOrders = (cust_id) => async dispatch => {
     API.get(`orders`) //with filter eme here if possible
         .then((response)=>{
-            let orders = response.data.data,
-                userOrder = orders.filter(e=>e.customer_id===cust_id)
-                dispatch({
-                    type: "LOGIN_USER",
-                    payload: userOrder
-                })
+            let orders = response.data.data.filter(e=>e.customer_id===cust_id)
+            dispatch({
+                type: "GET_ORDERS",
+                payload: orders
+            })
         })
+}
+
+export const clearOrders = () => {
+    return {
+        type: "CLEAR_ORDERS"
+    }
 }

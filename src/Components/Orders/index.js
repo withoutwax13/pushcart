@@ -1,8 +1,9 @@
 import { connect } from "react-redux"
+import { Navigate } from "react-router-dom"
 
 const Orders = ({user, orders, products}) => {
     let sum = 0
-    return (
+    return user === null ? <Navigate replace to="/pushcart/login"/> : (
         <section class="h-100 gradient-custom">
             <div class="container py-5 h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100">
@@ -15,7 +16,7 @@ const Orders = ({user, orders, products}) => {
                         <div class="d-flex justify-content-between align-items-center mb-4">
                         <p class="lead fw-normal mb-0" style={{color: "#C7493A"}}>Order History</p>
                         </div>
-                        {orders.map(z=>{
+                        {orders.length === 0 ? null : orders.map(z=>{
                             let p = products.data.filter(prod=>z.product_id === prod.product_id)[0]
                             console.log(p.price)
                             sum += Number(p.price)
