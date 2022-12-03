@@ -1,7 +1,7 @@
 import {Box, Stack, Button, Grid, Typography, Divider} from '@mui/material'
 import { useEffect, useState } from 'react';
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {Link, redirect} from 'react-router-dom'
 
 import store from '../../../../store'
 
@@ -9,6 +9,7 @@ import PhpIcon from '@mui/icons-material/Php';
 
 function Checkout(props) {
     let cart = store.getState().cart
+    let user = store.getState().user
     return (
         <Box
             sx={{
@@ -16,10 +17,8 @@ function Checkout(props) {
             }}
             style={{boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px', padding: '10% 10%'}}>
             <Stack spacing={2}>
-                <Button fullWidth={true} color='secondary' variant="contained" size="large" style={{borderRadius: '50px'}}>
-                    <Link to={`/pushcart/checkout`} style={{color: 'inherit'}}>
-                        CONTINUE TO CHECKOUT
-                    </Link>
+                <Button fullWidth={true} color='secondary' variant="contained" size="large" style={{borderRadius: '50px'}} disabled={cart.length === 0}>
+                    <Link to={user !== null ? `/pushcart/checkout` : `/pushcart/login`} style={{color: 'inherit'}}>{user !== null ? `CONTINUE TO CHECKOUT` : `LOGIN TO CHECKOUT`}</Link>
                 </Button>
                 <Grid container spacing={2}>
                     <Grid item md={7} xs={6} sm={6}>

@@ -76,11 +76,7 @@ function App({getProductsByFilter, clearProducts, resetFilter}) {
           <Cart/>
         </>
       }/>
-      <Route path='pushcart/checkout' element={
-        <>
-          {store.getState().user === null ? <Login/> : <Checkout/>}
-        </>
-      }/>
+      <Route path='pushcart/checkout' element={<Checkout/>}/>
       <Route path='pushcart/orders' element={
         <>
           <Header/>

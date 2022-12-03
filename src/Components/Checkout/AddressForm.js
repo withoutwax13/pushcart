@@ -11,7 +11,7 @@ function AddressForm(props) {
     // var { houseNum, street, brgy, city, province, postalCode } = props.address
     // var { firstName, lastName } = props.user
 
-    React.useEffect(()=>props.handler({address: `${user.address_line_1} ${user.address_line_1}, ${user.city}, Philippines ${user.postalCode}`, name: `${user.first_name} ${user.last_name}`}), [props])
+    React.useEffect(()=>props.handler({address: `${user.address_line_1} ${user.address_line_1}, ${user.city}, Philippines ${user.postal_code}`, name: `${user.first_name} ${user.last_name}`}), [props])
   return (
     <React.Fragment>
       <Typography sx={{marginBottom: '30px'}} variant="h4" gutterBottom>
@@ -30,7 +30,7 @@ function AddressForm(props) {
         </Grid>
         <Grid item xs={12}>
             <Typography variant='h6'>
-                <b>Address:</b> {`${user.address_line_1}, ${user.address_line_2}, ${user.city}, Philippines ${user.postalCode}`}
+                <b>Address:</b> {`${user.address_line_1}, ${user.address_line_2}, ${user.city}, Philippines ${user.postal_code}`}
           </Typography>
         </Grid>
       </Grid>

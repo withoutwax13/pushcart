@@ -33,7 +33,6 @@ const userReducer = (userState = null, action) => {
         case "LOGOUT_USER":
             return action.payload
         case "LOGIN_USER":
-            console.log(action.payload)
             return action.payload
         default:
             return userState

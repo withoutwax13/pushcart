@@ -22,8 +22,8 @@ function Review(props) {
       </Typography>
       <List disablePadding>
         {cart.map((product) => (
-          <ListItem key={product.heading} sx={{ py: 1, px: 0 }}>
-            <ListItemText primary={product.heading} secondary={`PHP ${(Math.round((product.price)* 100) / 100).toFixed(2)} x ${product.cartPush}`} />
+          <ListItem key={product.product_name} sx={{ py: 1, px: 0 }}>
+            <ListItemText primary={product.product_name} secondary={`PHP ${(Math.round((product.price)* 100) / 100).toFixed(2)} x ${product.cartPush}`} />
             <Typography variant="body2">PHP {(Math.round((product.price * product.cartPush)* 100) / 100).toFixed(2)}</Typography>
           </ListItem>
         ))}
