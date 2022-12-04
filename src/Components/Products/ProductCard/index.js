@@ -1,18 +1,14 @@
 import { addToCart } from "../../../Actions"
 import {connect} from 'react-redux'
-import RemoveIcon from '@mui/icons-material/Remove';
-import AddIcon from '@mui/icons-material/Add'; 
-import { Badge, Grid, IconButton } from "@mui/material";
+import { Badge, Button } from "@mui/material";
 import { useState } from "react";
 import * as React from 'react';
-import Box from '@mui/material/Box';
 
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
 
 import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
 
 const style = {
   position: 'absolute',
@@ -110,7 +106,7 @@ const ProductCard = (props) => {
             </div>
             <h6 class="price">PHP {(Math.round(price*100)/100).toFixed(2)}</h6>
             <Badge badgeContent={countValue} color="primary">
-                <button class="buy-1 btn btn-sm" onClick={handleClickCartIcon}><Typography>Add to Cart</Typography></button>
+                <Button className="buy-1 btn btn-sm" onClick={handleClickCartIcon} disabled={countValue === 0}><Typography>Add to Cart</Typography></Button>
             </Badge>
             
         </div>  
