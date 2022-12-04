@@ -1,7 +1,26 @@
+import { useEffect } from "react"
 import { connect } from "react-redux"
 import { Navigate } from "react-router-dom"
 
+const placeholder = () => {
+    return (
+    <p class="placeholder-glow">
+        <span class="placeholder col-12"></span>
+        <span class="placeholder col-12"></span>
+        <span class="placeholder col-12"></span>
+        <span class="placeholder col-12"></span>
+        <span class="placeholder col-12"></span>
+        <span class="placeholder col-12"></span>
+        <span class="placeholder col-12"></span>
+        <span class="placeholder col-12"></span>
+      </p>
+    )
+}
+
 const Orders = ({user, orders, products}) => {
+    useEffect(()=>{
+        
+    }, [orders, user])
     let sum = 0
     return user === null ? <Navigate replace to="/pushcart/login"/> : (
         <section class="h-100 gradient-custom">
@@ -16,7 +35,7 @@ const Orders = ({user, orders, products}) => {
                         <div class="d-flex justify-content-between align-items-center mb-4">
                         <p class="lead fw-normal mb-0" style={{color: "#C7493A"}}>Order History</p>
                         </div>
-                        {orders.length === 0 ? null : orders.map(z=>{
+                        {orders.length === 0 ? placeholder() : orders.map(z=>{
                             let p = products.data.filter(prod=>z.product_id === prod.product_id)[0]
                             console.log(p.price)
                             sum += Number(p.price)

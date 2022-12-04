@@ -54,8 +54,7 @@ function App({getProductsByFilter, clearProducts, resetFilter, getOrders}) {
       resetFilter()
       clearOrders()
     }
-  }, [store.getState().filter, store.getState().orders])
-  console.log("persist store", store.getState())
+  }, [store.getState().filter, store.getState().orders, store.getState().user])
   return (
     <ThemeProvider theme={theme}>
       <Routes>
