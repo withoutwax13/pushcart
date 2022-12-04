@@ -10,7 +10,6 @@ function ItemList({cart, updateCart}) {
     }, [user])
     const displayItems = () => {
         if(cart.length != 0){
-            console.log("cart", cart)
             return cart.map((item)=><Container key={item.product_id}><Item id={item.product_id}/><Divider variant="middle" /></Container>)
         }else{
             return <Typography variant='h5' alignSelf='center'>No items in the cart.</Typography>

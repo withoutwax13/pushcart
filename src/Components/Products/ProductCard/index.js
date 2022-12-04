@@ -68,7 +68,6 @@ const ProductCard = (props) => {
     const handleClickCartIcon = () => {
         let updatedData = props.data
         updatedData.cartPush = countValue
-        console.log("add", updatedData)
         props.addToCart(updatedData)
         setCountValue(0)
     }
