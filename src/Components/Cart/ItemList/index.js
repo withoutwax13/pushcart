@@ -1,9 +1,13 @@
 import {Box, Container, Stack, Typography, Divider} from '@mui/material'
 import Item from './Item';
-
-const fakeUser = {address: "145 Tonyo St., Tondo, Manila, Philippines 1012"}
+import store from '../../../store'
+import { useEffect, useState } from 'react';
 
 function ItemList({cart, updateCart}) {
+    const [user, setUser] = useState(store.getState().user)
+    useEffect(()=>{
+        setUser(store.getState().user)
+    }, [user])
     const displayItems = () => {
         if(cart.length != 0){
             console.log("cart", cart)
@@ -29,7 +33,7 @@ function ItemList({cart, updateCart}) {
                         backgroundColor: 'primary.contrastText',
                         boxShadow: 'rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px'
                     }}>
-                    <Typography variant='h5'>Shipping Address: {fakeUser.address}</Typography>
+                    <Typography variant='h5'>{user === null ? `Login to Set Default Shipping Address` : `Default Shipping Address: ${user.address_line_1} ${user.address_line_1}, ${user.city}, Philippines ${user.postal_code}`}</Typography>
                 </Box>
                 {displayItems()}
             </Stack>

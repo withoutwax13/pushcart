@@ -1,4 +1,4 @@
-import {Container, Stack, Grid, Box, Typography, Button, Tooltip, IconButton, Divider} from '@mui/material'
+import {Container, Stack, Grid, Box, Typography, Button, Tooltip, IconButton, Divider, TextField} from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'; 
 import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
@@ -29,21 +29,6 @@ function Item({id, updateCart, removeFromCart}) {
         removeFromCart(id)
     }
 
-    const handleChange = (e) => {
-        if(/[a-zA-Z]/.test(e.target.value)){
-            setItemCount(1)
-            updatePushCartData()
-        }else if(e.target.value > stock){
-            setItemCount(stock)
-            updatePushCartData()
-        }else if(Number(e.target.value) <= 0){
-            setItemCount(1)
-            updatePushCartData()
-        }else{
-            setItemCount(Number(e.target.value))
-            updatePushCartData()
-        }
-    }
     const handleIncrement = () => {
         setItemCount(prevState=> prevState < stock ? prevState + 1 : stock)
         let nData = {...itemData, cartPush: cartItemCount < stock ? cartItemCount + 1 : stock}
@@ -84,7 +69,7 @@ function Item({id, updateCart, removeFromCart}) {
                         </Box> 
                     </Grid>
                     <Grid item md={7} sx={{paddingTop: '5px', paddingBottom: '5px'}}>
-                        {<Typography variant='h6'>{product_name}</Typography>}
+                        {<Typography variant='h6'  style={{fontWeight: '800'}}>{product_name}</Typography>}
                     </Grid>
                     <Grid item md={3} justifyContent='flex-end' sx={{paddingTop: '5px', paddingBottom: '5px'}}>
                         <Typography variant='h6' style={{fontWeight: '800'}}><PhpIcon fontSize='large'/>{` ${(Math.round(price*100)/100).toFixed(2)}`}</Typography>
@@ -101,13 +86,19 @@ function Item({id, updateCart, removeFromCart}) {
                             <IconButton size='small' onClick={handleDecrement}>
                                 <RemoveIcon fontSize="inherit"/>
                             </IconButton>
-                            <input 
+                            {/* <TextField 
+                                disabled
                                 type='text' 
                                 style={{borderWidth: '0.5px', borderTop: 'none', borderLeft: 'none', borderRight: 'none', textAlign: 'center', width: '100px'}} 
                                 sx={{width: 1/2}} 
-                                value={cartItemCount} 
-                                onChange={handleChange}
-                            />
+                                value={cartItemCount}
+                            /> */}
+                            <Typography
+                                style={{borderTop: 'none', borderLeft: 'none', borderRight: 'none', textAlign: 'center', width: '100px'}}  
+                                sx={{width: 1/2}} 
+                                variant='h6'>
+                                    {cartItemCount}
+                            </Typography>
                             <IconButton size='small' onClick={handleIncrement}>
                                 <AddIcon fontSize="inherit"/>
                             </IconButton>

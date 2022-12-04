@@ -14,15 +14,19 @@ function Checkout(props) {
         <Box
             sx={{
                 backgroundColor: 'primary.containerNotWhite',
+                maxWidth: `${(window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth)/3}px`,
+                width: `${(window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth)/3.5}px`,
             }}
             style={{boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px', padding: '10% 10%'}}>
             <Stack spacing={2}>
-                <Button fullWidth={true} color='secondary' variant="contained" size="large" style={{borderRadius: '50px'}} disabled={cart.length === 0}>
-                    <Link to={user !== null ? `/pushcart/checkout` : `/pushcart/login`} style={{color: 'inherit'}}>{user !== null ? `CONTINUE TO CHECKOUT` : `LOGIN TO CHECKOUT`}</Link>
-                </Button>
+                <Link to={user !== null ? `/pushcart/checkout` : `/pushcart/login`} style={{color: 'inherit'}}>
+                    <Button fullWidth={true} color='secondary' variant="contained" size="large" style={{borderRadius: '50px'}} disabled={cart.length === 0}>
+                        {user !== null ? `CONTINUE TO CHECKOUT` : `LOGIN TO CHECKOUT`}
+                    </Button>
+                </Link>
                 <Grid container spacing={2}>
                     <Grid item md={7} xs={6} sm={6}>
-                        <Typography variant='h6'>Subtotal ({cart.reduce((a,b)=>{return a + Number(b.cartPush)}, 0)})</Typography>
+                        <Typography variant='h6' style={{opacity: '70%'}}>Subtotal ({cart.reduce((a,b)=>{return a + Number(b.cartPush)}, 0)})</Typography>
                     </Grid>
                     <Grid item md={5} xs={6} sm={6} justifyContent='flex-end'>
                         <Typography variant='h6' style={{opacity: '70%'}}><PhpIcon fontSize='large'/> {(Math.round(cart.reduce((a,b)=>{return a + (b.price*b.cartPush)}, 0)*100)/100).toFixed(2)}</Typography>
@@ -30,7 +34,7 @@ function Checkout(props) {
                 </Grid>
                 <Grid container spacing={2}>
                     <Grid item md={7} xs={6} sm={6}>
-                        <Typography variant='h6'>Taxes</Typography>
+                        <Typography variant='h6' style={{opacity: '70%'}}>Taxes</Typography>
                     </Grid>
                     <Grid item md={5} xs={6} sm={6}>
                         <Typography variant='h6' style={{opacity: '70%'}}>Calculated at Checkout</Typography>

@@ -6,9 +6,9 @@ import { Container } from "@mui/system";
 function AuxWrapper({cart}) {
     return (
         <Container>
-            <Stack spacing={1} style={{position: 'fixed'}}>
+            <Stack style={{position: 'fixed'}}>
                 <Checkout/>
-                <Voucher/>
+                {/* <Voucher/> */}
             </Stack>
         </Container>
     );

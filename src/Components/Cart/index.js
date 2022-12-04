@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import {Grid, Container, Typography, Button} from '@mui/material'
+import {Grid, Container} from '@mui/material'
 import AuxWrapper from "./AuxWrapper";
 import ItemList from './ItemList';
 
@@ -10,9 +10,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import RestoreIcon from '@mui/icons-material/Restore';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 
 function Cart(props) {
@@ -23,9 +21,7 @@ function Cart(props) {
     
     return (
         <Container style={{paddingTop: '20px'}}>
-            {/* <Typography variant='h5'>Cart ({cart.length} {cart.length > 1 ? `items` : `item`})</Typography> */}
             <Grid sm={12} sx={{ display: { xs: 'block', sm: 'block', md: 'none' } }}>
-                
                 <Box sx={{ display: { xs: 'block', sm: 'block', md: 'none' } }}>
                 <BottomNavigation
                     showLabels
