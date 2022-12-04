@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
+import LoadingButton from '@mui/lab/LoadingButton'
+import {Alert} from '@mui/material'
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import {Link, Navigate} from 'react-router-dom';
@@ -26,10 +27,28 @@ function Copyright(props) {
   );
 }
 
+const ErrorFeed = ({uname}) => {
+  return (
+    <Alert severity="error">{`Oops! Username and password were not found in our system. Please make sure that you have the correct credentials to login. If you think this is an error, please contact our system administrator.`}</Alert>
+  )
+}
+
 function Login({login, user}) {
-  
   const [email_address, setemail] = React.useState("")
   const [pw, setpw] = React.useState("")
+  const [sub, didSub] = React.useState(false)
+
+  const [buttonLoading, setButtonLoading] = React.useState(false)
+  const [showErrorFeed, setShowErrorFeed] = React.useState(false)
+
+  React.useEffect(()=>{
+    setTimeout(()=>{
+      setButtonLoading(false)
+      setpw("")
+      setShowErrorFeed(true)
+      didSub(false)
+    }, 10000)
+  }, [user, sub])
 
   return user !== null ? <Navigate replace to="/pushcart/cart"/> : (
     
@@ -93,18 +112,23 @@ function Login({login, user}) {
                 value={pw}
                onChange={e=>setpw(e.target.value)}
               />
-              <Button
+              <LoadingButton
                 onClick={()=>{
                   if(email_address !== "" && Password !== ""){
                     login({email_address: email_address, password: pw})
                   }
+                  setButtonLoading(true)
+                  setShowErrorFeed(false)
+                  didSub(true)
                 }}
+                
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                loading={buttonLoading}
               >
                 Sign In
-              </Button>
+              </LoadingButton>
               <Grid container>
                 <Grid item>
                   <Link to={`/pushcart/register`} variant="body2">
@@ -112,6 +136,7 @@ function Login({login, user}) {
                   </Link>
                 </Grid>
               </Grid>
+              {showErrorFeed ? <ErrorFeed uname={email_address}/> : null}
               <Copyright sx={{ mt: 5 }} />
             </Box>
           </Box>
