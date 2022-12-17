@@ -72,7 +72,7 @@ export const setCategoryFilter = (categoryID) => {
 
 // products
 export const getProducts = () => async dispatch => {
-    API.get(`products`)
+    API.get(`/products`)
         .then((response)=>{
             dispatch({
                 type: "GET_PRODUCTS",
@@ -91,7 +91,7 @@ export const getProductsByFilter = (sfilter = {
     }, 
     tags: []
 })=> async dispatch => {
-    API.get(`products`)
+    API.get(`/products`)
         .then((response)=>{
             let newProds = response.data
             newProds.data = newProds.data.filter((prod)=>{
@@ -138,7 +138,7 @@ export const clearProducts = () => {
 
 // user
 export const login = (creds) => async dispatch => {
-    API.get('customers')
+    API.get('/customers')
         .then((response)=>{
             let customers = response.data.data,
                 user = customers.filter(e=>e.email_address===creds.email_address)[0]
@@ -155,7 +155,7 @@ export const login = (creds) => async dispatch => {
 
 // orders
 export const getOrders = (cust_id) => async dispatch => {
-    API.get(`orders`) //with filter eme here if possible
+    API.get(`/orders`) //with filter eme here if possible
         .then((response)=>{
             let orders = response.data.data.filter(e=>e.customer_id===cust_id)
             dispatch({

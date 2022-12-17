@@ -66,7 +66,7 @@ function App({getProductsByFilter, clearProducts, resetFilter, getOrders}) {
         </>
       }/>
       <Route path='pushcart/login' element={ <Login/>}/>
-      <Route path='pushcart/register' element={<Register/>}/>
+      <Route path='pushcart/register' element={<Login/>}/>
       <Route path='pushcart/products' element={
         <>
           <Header/>
